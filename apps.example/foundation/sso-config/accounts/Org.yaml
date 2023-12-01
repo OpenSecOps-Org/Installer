@@ -3,9 +3,9 @@ account_id: "{admin-account}"
 sso_groups:
   cloud-administration:
     - AWSAdministratorAccess
-    - AWSReadOnlyAccess
+    - ReadOnlyWideAccess
   security-administration:
-    - AWSReadOnlyAccess
+    - ReadOnlyWideAccess
 
   account-administration:
     - AWSServiceCatalogAdminFullAccess
@@ -17,7 +17,7 @@ sso_groups:
   AWSSecurityAuditPowerUsers:
     - AWSPowerUserAccess
   AWSSecurityAuditors:
-    - AWSReadOnlyAccess
+    - ReadOnlyWideAccess
   AWSServiceCatalogAdmins:
     - AWSServiceCatalogAdminFullAccess
   AWSAccountFactory:

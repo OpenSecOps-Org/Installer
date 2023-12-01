@@ -17,6 +17,7 @@ aws_managed_policies:
   - AWSSSOMemberAccountAdministrator
   - AWSStepFunctionsConsoleFullAccess
   - ViewOnlyAccess
+  - ReadOnlyAccess
 
 inline_policy: null
 

@@ -17,7 +17,7 @@ inline_policy:
     - 
       Effect: Allow
       NotAction:
-        # - iam:*
+        - iam:*
         - organizations:*
         - account:*
       Resource: "*"

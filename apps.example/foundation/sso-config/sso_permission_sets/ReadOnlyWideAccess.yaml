@@ -1,0 +1,38 @@
+permission_set_name: ReadOnlyWideAccess
+
+description:
+    A read-only permission set with extended permissions compared to ViewOnlyAccess.
+
+session_duration: PT8H
+
+permissions_boundary: null
+
+aws_managed_policies:
+    - ReadOnlyAccess
+    - ViewOnlyAccess
+
+inline_policy:
+    Version: "2012-10-17"
+    Statement:
+        - 
+          Sid: AllowRead
+          Effect: Allow
+          Resource: "*"
+          Action:
+              - account:GetAccountInformation
+              - account:ListRegions
+              - billing:Get*
+              - billing:List*
+              - budgets:ViewBudget
+              - ce:Describe*
+              - ce:Get*
+              - ce:List*
+              - cloudfront:Describe*
+              - cloudfront:Get*
+              - cloudfront:List*
+              - cur:Describe*
+              - cur:Get*
+              - freetier:Get*
+              - health:Describe*
+              - support:Get*
+              - support:List*

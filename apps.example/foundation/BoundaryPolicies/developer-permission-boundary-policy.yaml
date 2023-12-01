@@ -27,12 +27,14 @@ Resources:
             - route53:*
             - route53domains:*
         - 
-          Sid: AllowLocalServicesInStockholm
+          Sid: AllowLocalServices
           Effect: Allow
           Resource: "*"
           Condition:
             StringEquals:
-              aws:RequestedRegion: eu-north-1
+              aws:RequestedRegion: 
+                - eu-north-1
+                - eu-west-2
           Action:
             - acm:*
             - apigateway:*
@@ -48,6 +50,7 @@ Resources:
             - codedeploy:*
             - codepipeline:*
             - codestar:*
+            - codestar-connections:*
             - config:*
             - datapipeline:*
             - dax:*

@@ -3,10 +3,10 @@ account_id: "{audit-account}"
 sso_groups:
   cloud-administration:
     - AWSAdministratorAccess
-    - AWSReadOnlyAccess
+    - ReadOnlyWideAccess
   security-administration:
     - SecurityAdministratorAccess
-    - AWSReadOnlyAccess
+    - ReadOnlyWideAccess
 
   AWSAuditAccountAdmins:
     - AWSAdministratorAccess
@@ -15,5 +15,5 @@ sso_groups:
   AWSSecurityAuditPowerUsers:
     - AWSPowerUserAccess
   AWSSecurityAuditors:
-    - AWSReadOnlyAccess
+    - ReadOnlyWideAccess
 

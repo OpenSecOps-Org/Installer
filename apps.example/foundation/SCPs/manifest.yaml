@@ -22,15 +22,6 @@ scps:
       organizational_units:
         - Root
 
-  - name: protect-security-hub-settings
-    description: |
-      Protects the Security Hub settings for standards and controls, etc, from being
-      modified.    
-    resource_file: protect-security-hub-settings.json
-    deployment_targets:
-      organizational_units:
-        - Root
-
   - name: require-boundary-permissions
     description: |
       Requires builder principals to use an appropriate boundary policy for creating IAM Roles.

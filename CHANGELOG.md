@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.2
+    * Synced policies.
+
 ## v1.1.1
     * Added BoundaryPolicies to the apps.example/foundation dir.
 

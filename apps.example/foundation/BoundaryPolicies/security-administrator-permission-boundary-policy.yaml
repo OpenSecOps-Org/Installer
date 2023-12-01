@@ -17,16 +17,16 @@ Resources:
           - 
             Effect: Allow
             NotAction:
-              # - iam:*
+              - iam:*
               - organizations:*
               - account:*
             Resource: "*"
           - 
             Effect: Allow
             Action:
-              # - iam:CreateServiceLinkedRole
-              # - iam:DeleteServiceLinkedRole
-              # - iam:ListRoles
+              - iam:CreateServiceLinkedRole
+              - iam:DeleteServiceLinkedRole
+              - iam:ListRoles
               - organizations:DescribeOrganization
               - account:ListRegions
             Resource: "*"
