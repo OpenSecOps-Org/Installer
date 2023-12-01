@@ -1,0 +1,101 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Developers",
+            "Effect": "Deny",
+            "Action": "iam:CreateRole",
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_DeveloperAccess_*"
+                    ]
+                },
+                "ArnNotLike": {
+                    "iam:PermissionsBoundary": [
+                        "arn:aws:iam::*:policy/developer-permission-boundary-policy"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "NetworkAdministrators",
+            "Effect": "Deny",
+            "Action": "iam:CreateRole",
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_NetworkAdministratorAccess_*"
+                    ]
+                },
+                "ArnNotLike": {
+                    "iam:PermissionsBoundary": [
+                        "arn:aws:iam::*:policy/network-administrator-permission-boundary-policy"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "SecurityAdministrators",
+            "Effect": "Deny",
+            "Action": "iam:CreateRole",
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_SecurityAdministratorAccess_*"
+                    ]
+                },
+                "ArnNotLike": {
+                    "iam:PermissionsBoundary": [
+                        "arn:aws:iam::*:policy/security-administrator-permission-boundary-policy"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyBPPolicyChange",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreatePolicy",
+                "iam:DeletePolicy",
+                "iam:CreatePolicyVersion",
+                "iam:DeletePolicyVersion",
+                "iam:DetachRolePolicy",
+                "iam:SetDefaultPolicyVersion"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:policy/*-permission-boundary-policy"
+            ],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyBPDeletion",
+            "Effect": "Deny",
+            "Action": "iam:DeleteRolePermissionsBoundary",
+            "Resource": "*",
+            "Condition": {
+                "ArnLike": {
+                    "iam:PermissionsBoundary": "arn:aws:iam::*:policy/*-permission-boundary-policy"
+                },
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        }
+    ]
+}

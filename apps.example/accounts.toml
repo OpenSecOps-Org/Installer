@@ -1,0 +1,20 @@
+# Account IDs and SSO profile names.
+# NB: Enter the SSO profile name, not the account name.
+# The profiles must have SystemAdministrator privileges.
+#
+
+admin-account.id               = "111111111111"
+admin-account.profile          = "AWSOrgRootAccountProfile"
+
+security-account.id            = "222222222222"
+security-account.profile       = "SecurityAdmAccountProfile"
+
+log-archive-account.id         = "333333333333"
+log-archive-account.profile    = "LogArchiveAccountProfile"
+
+aft-management-account.id      = "444444444444"
+aft-management-account.profile = "AFTManagementAccountProfile"
+
+audit-account.id               = "555555555555"
+audit-account.profile          = "AuditAccountProfile"
+

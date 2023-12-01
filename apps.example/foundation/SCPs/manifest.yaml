@@ -1,0 +1,58 @@
+---
+scps:
+
+  - name: protect-foundations
+    description: |
+      Protects CloudTrail, Config, GuardDuty from creation, modification, and deletion
+      by non-admins. Prevents IAM Users from being manipulated except by admins. 
+      Protects AFT data from being changed or even seen by Developers.
+    resource_file: protect-foundations.json
+    deployment_targets:
+      organizational_units:
+        - Root
+
+  - name: protect-infra-immutable
+    description: |
+      Allows the tag infra:immutable to be set, updated, or deleted only by the system
+      and by admins. Prevents the infrastructure thus tagged from modification/deletion. 
+      Name conventions used due to lack of tagging conditionals: Lambda, SSM, DynamoDB, 
+      DAX, SQS, EC2, S3, CloudFormation.
+    resource_file: protect-infra-immutable.json
+    deployment_targets:
+      organizational_units:
+        - Root
+
+  - name: protect-security-hub-settings
+    description: |
+      Protects the Security Hub settings for standards and controls, etc, from being
+      modified.    
+    resource_file: protect-security-hub-settings.json
+    deployment_targets:
+      organizational_units:
+        - Root
+
+  - name: require-boundary-permissions
+    description: |
+      Requires builder principals to use an appropriate boundary policy for creating IAM Roles.
+      Protects boundary permissions from tampering.
+    resource_file: require-boundary-permissions.json
+    deployment_targets:
+      organizational_units:
+        - Root
+
+  - name: protect-monthly-account-budget
+    description: |
+      Protects AWS Budgets named monthly-account-budget from modification.    
+    resource_file: protect-monthly-account-budget.json
+    deployment_targets:
+      organizational_units:
+        - Sandbox
+        - IndividualBusinessUsers
+
+  - name: protect-sso
+    description: |
+      Protects Permission Sets from modification.    
+    resource_file: protect-sso.json
+    deployment_targets:
+      organizational_units:
+        - AFT

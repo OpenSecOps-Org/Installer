@@ -1,0 +1,21 @@
+account_id: "{log-archive-account}"
+
+sso_groups:
+  cloud-administration:
+    - AWSAdministratorAccess
+    - AWSReadOnlyAccess
+  security-administration:
+    - SecurityAdministratorAccess
+    - AWSReadOnlyAccess
+
+  AWSControlTowerAdmins:
+    - AWSAdministratorAccess
+  AWSLogArchiveAdmins:
+    - AWSAdministratorAccess
+  AWSLogArchiveViewers:
+    - AWSReadOnlyAccess
+  AWSSecurityAuditPowerUsers:
+    - AWSPowerUserAccess
+  AWSSecurityAuditors:
+    - AWSReadOnlyAccess
+

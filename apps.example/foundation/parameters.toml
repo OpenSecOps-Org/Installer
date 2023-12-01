@@ -1,0 +1,220 @@
+# Parameters for all Delegat Foundation repos
+
+# --------------------------------------------------------------
+#
+# Global parameters (used across repos)
+#
+# --------------------------------------------------------------
+
+# AWS Organizations
+org-id                      = 'o-xxxxxxxxxx'
+root-ou                     = 'r-xxxx'
+
+# Regions
+main-region                 = 'eu-xxxxx-1'
+other-regions               = ['us-xxxx-1']
+
+# Either AWSControlTowerExecution (under Control Tower) 
+# or OrganizationAccountAccessRole (under plain AWS Organizations)
+cross-account-role          = "AWSControlTowerExecution"
+
+# The email domain to use for notifications
+email-domain                = 'example.com'
+
+# Group prefix for SSO
+sso-group-prefix            = "acme-inc-"
+
+
+# --------------------------------------------------------------
+#
+# Foundation-new-account-created-sns-topic
+#
+# --------------------------------------------------------------
+
+[Foundation-new-account-created-sns-topic.INFRA-new-account-created-sns-topic]
+
+CrossAccountRole = '{cross-account-role}'
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-default-vpc-remover
+#
+# --------------------------------------------------------------
+
+[Foundation-default-vpc-remover.SAM]
+
+RoleToAssume                 = '{cross-account-role}'
+AccountCreatedTopicArn       = "arn:aws:sns:{main-region}:{admin-account}:new-account-created"
+AccountCreatedTopicArnRegion = "{main-region}"
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-enable-ebs-encryption-by-default
+#
+# --------------------------------------------------------------
+
+[Foundation-enable-ebs-encryption-by-default.INFRA-enable-ebs-encryption-by-default]
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-iam-password-policy
+#
+# --------------------------------------------------------------
+
+[Foundation-iam-password-policy.INFRA-iam-password-policy]
+
+MaxPasswordAge        = '90'
+MinPasswordLength     = '14'
+PasswordHistory       = '24'
+RequireLowercaseChars = 'True'
+RequireNumbers        = 'True'
+RequireSymbols        = 'True'
+RequireUppercaseChars = 'True'
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-infra-immutable-tagger
+#
+# --------------------------------------------------------------
+
+[Foundation-infra-immutable-tagger.SAM]
+
+RoleToAssume                 = '{cross-account-role}'
+AccountCreatedTopicArn       = "arn:aws:sns:{main-region}:{admin-account}:new-account-created"
+AccountCreatedTopicArnRegion = "{main-region}"
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-instance-port-report
+#
+# --------------------------------------------------------------
+
+[Foundation-instance-port-report.SAM]
+
+EmailRecipients  = "accounts@example.com"   # Configure this
+EmailCC          = "soc@example.com"        # Configure this
+EmailBCC         = ""                       # Configure this
+
+CrossAccountRole = '{cross-account-role}'
+Regions          = "{all-regions}"
+EmailSender      = "no-reply@{email-domain}"
+EmailReturnPath  = "no-reply@{email-domain}"
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-limit-log-group-retention
+#
+# --------------------------------------------------------------
+
+[Foundation-limit-log-group-retention.SAM]
+
+CrossAccountRole = '{cross-account-role}'
+OrgAccountId     = '{admin-account}'
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-permission-boundary-policies
+#
+# --------------------------------------------------------------
+
+[Foundation-permission-boundary-policies.INFRA-security-administrator-permission-boundary-policy]
+[Foundation-permission-boundary-policies.INFRA-network-administrator-permission-boundary-policy]
+[Foundation-permission-boundary-policies.INFRA-developer-permission-boundary-policy]
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-AWS-Core-SSO-Configuration
+#
+# --------------------------------------------------------------
+
+[Foundation-AWS-Core-SSO-Configuration.sync-groups]
+
+group-prefix = '{sso-group-prefix}'
+
+
+[Foundation-AWS-Core-SSO-Configuration.sync-permission-sets]
+
+
+[Foundation-AWS-Core-SSO-Configuration.sync-accounts]
+
+group-prefix = '{sso-group-prefix}'
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-CloudWatch2S3
+#
+# --------------------------------------------------------------
+
+[Foundation-CloudWatch2S3.INFRA-CloudWatch2S3]
+
+OrganizationId               = '{org-id}'
+BucketName                   = ''
+BucketPrefix                 = 'logs/'
+BufferIntervalHint           = '300'
+BufferSizeHint               = '50'
+DestinationName              = 'BucketBackupLogDestination'
+KeyArn                       = ''
+LogFormat                    = 'CloudWatch JSON (GZIP)'
+LogGroupNamePrefix           = ''
+ProcessorBufferIntervalHint  = '60'
+ProcessorBufferSizeHint      = '1'
+Retention                    = '24'
+ShardCount                   = '1'
+SubscribeSchedule            = 'rate(1 hour)'
+
+
+[Foundation-CloudWatch2S3.INFRA-CloudWatch2S3-additional-account]
+
+LogDestination     = 'arn:aws:logs:{region}:{log-archive-account}:destination:BucketBackupLogDestination'
+LogGroupNamePrefix = ''
+SubscribeSchedule  = 'rate(1 hour)'
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-control-tower-log-aggregator
+#
+# --------------------------------------------------------------
+
+[Foundation-control-tower-log-aggregator.SAM]
+
+ControlTowerBucket                = 'aws-controltower-logs-{log-archive-account}-{main-region}'
+ControlTowerBucketAccessLogBucket = 'aws-controltower-s3-access-logs-{log-archive-account}-{main-region}'
+OtherBuckets                      = 'aws-aft-logs-,aws-aft-s3-access-logs-,infra-cloudwatch2s3-logbucket-,cloudfront-logs-,cloudfront-s3-access-logs-,load-balancer-logs-,load-balancer-s3-access-logs-'
+FinalAggregationPrefix            = 'AggregatedLogs'
+OrganizationId                    = '{org-id}'
+UseCommonDestinationBucket        = 'Yes'
+ExpirationInDays                  = 3650
+DaysUntilGlacierDeepArchive       = 90
+GlacierObjectSize                 = 204800
+AggregationRegions                = '{all-regions}'
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-service-control-policies
+#
+# --------------------------------------------------------------
+
+[Foundation-service-control-policies.sync-scps]
+

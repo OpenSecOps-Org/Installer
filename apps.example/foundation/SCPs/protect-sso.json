@@ -1,0 +1,29 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ProtectPermissionSets",
+      "Effect": "Deny",
+      "Action": [
+        "sso-admin:Attach*",
+        "sso-admin:CreatePermissionSet",
+        "sso-admin:DeleteInlinePolicy*",
+        "sso-admin:DeletePermissionSet",
+        "sso-admin:DeletePermissionsBoundary*",
+        "sso-admin:Detach*",
+        "sso-admin:Put*",
+        "sso-admin:UpdatePermissionSet"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/AWSControlTowerExecution",
+            "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+            "arn:aws:iam::*:role/stacksets-exec-*"
+          ]
+        }
+      }
+    }
+  ]
+}

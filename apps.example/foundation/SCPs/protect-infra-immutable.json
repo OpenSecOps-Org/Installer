@@ -1,0 +1,183 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DenyTagToServicesThatSupportTagKeysConditions",
+            "Effect": "Deny",
+            "Action": [
+                "access-analyzer:TagResource",
+                "access-analyzer:UntagResource",
+                "cloudformation:TagResource",
+                "cloudformation:UntagResource",
+                "cloudwatch:TagResource",
+                "cloudwatch:UntagResource",
+                "events:TagResource",
+                "events:UntagResource",
+                "guardduty:TagResource",
+                "guardduty:UntagResource",
+                "iam:Tag*",
+                "iam:Untag*",
+                "inspector2:TagResource",
+                "inspector2:UntagResource",
+                "kms:TagResource",
+                "kms:UntagResource",
+                "rds:AddTagsToResource",
+                "rds:RemoveTagsFromResource",
+                "resource-groups:Tag",
+                "resource-groups:Untag",
+                "secretsmanager:TagResource",
+                "secretsmanager:UntagResource",
+                "sns:TagResource",
+                "sns:UntagResource",
+                "states:TagResource",
+                "states:UntagResource"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:TagKeys": [
+                        "infra:immutable"
+                    ]
+                },
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyModificationOfTaggedResources",
+            "Effect": "Deny",
+            "Action": [
+                "access-analyzer:Delete*",
+                "access-analyzer:Update*",
+                "cloudformation:CreateChangeSet",
+                "cloudformation:CreateStack*",
+                "cloudformation:UpdateStack*",
+                "cloudwatch:Delete*",
+                "cloudwatch:Disable*",
+                "cloudwatch:Enable*",
+                "cloudwatch:Put*",
+                "cloudwatch:Set*",
+                "cloudwatch:Start*",
+                "cloudwatch:Stop*",
+                "events:Cancel*",
+                "events:Deactivate*",
+                "events:Deauthorize*",
+                "events:Delete*",
+                "events:Disable*",
+                "events:Enable*",
+                "events:Put*",
+                "events:Update*",
+                "guardduty:Delete*",
+                "guardduty:Update*",
+                "iam:Add*",
+                "iam:Attach*",
+                "iam:Deactivate*",
+                "iam:Delete*",
+                "iam:Detach*",
+                "iam:Put*",
+                "iam:Remove*",
+                "iam:Set*",
+                "iam:Update*",
+                "inspector2:Disable*",
+                "inspector2:Enable*",
+                "inspector2:Update*",
+                "kms:Cancel*",
+                "kms:Delete*",
+                "kms:Disable*",
+                "kms:Enable*",
+                "kms:Put*",
+                "kms:ScheduleKeyDeletion",
+                "kms:Update*",
+                "rds:AddRole*",
+                "rds:Apply*",
+                "rds:Authorize*",
+                "rds:Copy*",
+                "rds:Delete*",
+                "rds:Modify*",
+                "rds:RemoveRole*",
+                "secretsmanager:Cancel*",
+                "secretsmanager:Delete*",
+                "sns:Add*",
+                "sns:Delete*",
+                "sns:Remove*",
+                "sns:Delete*",
+                "sns:SetTopicAttributes",
+                "states:DeleteStateMachine",
+                "states:UpdateStateMachine"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/infra:immutable": "true"
+                },
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyCloudFormationMutationOfINFRA",
+            "Effect": "Deny",
+            "Action": [
+                "cloudformation:CancelUpdateStack",
+                "cloudformation:CreateStack*",
+                "cloudformation:DeleteStack*",
+                "cloudformation:ExecuteChangeSet",
+                "cloudformation:SetStackPolicy",
+                "cloudformation:StopStackSetOperation",
+                "cloudformation:TagResource",
+                "cloudformation:UntagResource",
+                "cloudformation:UpdateStack*"
+            ],
+            "Resource": [
+                "arn:aws:cloudformation:*:*:stack/INFRA-*",
+                "arn:aws:cloudformation:*:*:stack/StackSet-INFRA-*",
+                "arn:aws:cloudformation:*:*:stackset/INFRA-*"
+            ],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyLambdaMutationOfINFRA",
+            "Effect": "Deny",
+            "Action": [
+                "lambda:Add*",
+                "lambda:Create*",
+                "lambda:Delete*",
+                "lambda:Publish*",
+                "lambda:Put*",
+                "lambda:Remove*",
+                "lambda:Update*"
+            ],
+            "Resource": [
+                "arn:aws:lambda:*:*:function:INFRA-*",
+                "arn:aws:lambda:*:*:function:StackSet-INFRA-*"
+            ],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,132 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ProtectSystemServices",
+            "Effect": "Deny",
+            "Action": [
+                "cloudtrail:CreateTrail",
+                "cloudtrail:DeleteTrail",
+                "cloudtrail:UpdateTrail",
+                "cloudtrail:StopLogging",
+                "config:DeleteAggregationAuthorization", 
+                "config:DeleteConfiguration*", 
+                "config:DeleteConformancePack", 
+                "config:DeleteDeliveryChannel", 
+                "config:DeleteOrganization*", 
+                "config:DeletePendingAggregationRequest", 
+                "config:PutAggregationAuthorization", 
+                "config:PutConfiguration*", 
+                "config:PutConformancePack", 
+                "config:PutDeliveryChannel", 
+                "config:PutOrganization*", 
+                "config:PutRetentionConfiguration", 
+                "config:StartConfigurationRecorder", 
+                "config:StopConfigurationRecorder", 
+                "guardduty:Create*", 
+                "guardduty:DeclineInvitations", 
+                "guardduty:Delete*", 
+                "guardduty:Disable*", 
+                "guardduty:Disassociate*",
+                "guardduty:EnableOrganizationAdminAccount", 
+                "guardduty:InviteMembers", 
+                "guardduty:StartMonitoringMembers", 
+                "guardduty:StopMonitoringMembers", 
+                "guardduty:Update*"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "PreventUserMutations",
+            "Effect": "Deny",
+            "Action": [
+                "iam:AttachUserPolicy",
+                "iam:CreateUser",
+                "iam:DeleteUser*",
+                "iam:DetachUserPolicy",
+                "iam:PutUser*",
+                "iam:RemoveUserFromGroup",
+                "iam:TagUser",
+                "iam:UnTagUser",
+                "iam:UpdateUser"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyModifyAccountPasswordPolicy",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreateAccountPasswordPolicy",
+                "iam:UpdateAccountPasswordPolicy",
+                "iam:DeleteAccountPasswordPolicy"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*",
+                        "arn:aws:iam::*:role/iam-password-policy-resource-execution-role"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyAFTCustomFieldsModification",
+            "Effect": "Deny",
+            "Action": [
+                "ssm:DeleteParameter*",
+                "ssm:PutParameter"
+            ],
+            "Resource": "arn:aws:ssm:*:*:parameter/aft/account-request/custom-fields/*",
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*",
+                        "arn:aws:iam::*:role/AWSAFTService",
+                        "arn:aws:iam::*:role/AWSAFTExecution"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyAFTCustomFieldsUseAndVisibility",
+            "Effect": "Deny",
+            "Action": [
+                "ssm:DeleteParameter*",
+                "ssm:DescribeParameters",
+                "ssm:GetParameter*",
+                "ssm:PutParameter"
+            ],
+            "Resource": "arn:aws:ssm:*:*:parameter/aft/account-request/custom-fields/*",
+            "Condition": {
+                "ArnLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_DeveloperAccess_*"
+                    ]
+                }
+            }
+        }
+    ]
+}

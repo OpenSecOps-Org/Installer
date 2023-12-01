@@ -1,0 +1,30 @@
+[GitHub]
+delegat_base_url = "https://github.com/Delegat-AB/"
+
+[[repos]]
+name = "SOAR-sec-hub-role"
+
+[[repos]]
+name = "SOAR-sec-hub-configuration"
+
+[[repos]]
+name = "SOAR"
+
+[[repos]]
+name = "SOAR-all-alarms-to-sec-hub"
+
+[[repos]]
+name = "SOAR-detect-log-buckets"
+
+[[repos]]
+name = "SOAR-soc-incident-when-s3-tag-applied"
+
+[[repos]]
+name = "SOAR-detect-stack-drift"
+
+[[repos]]
+name = "SOAR-SAM-Automating-Forensic-Disk-Collection"
+open_source = true
+credits     = "Logan Bair's forensic disk collection automation as implemented for Goldman Sachs"
+url         = "https://aws.amazon.com/blogs/security/how-to-automate-forensic-disk-collection-in-aws"
+

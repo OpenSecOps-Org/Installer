@@ -1,0 +1,302 @@
+# --------------------------------------------------------------
+#
+# Global parameters (used across repos)
+#
+# --------------------------------------------------------------
+
+# AWS Organizations
+org-id                      = 'o-xxxxxxxxxx'
+root-ou                     = 'r-xxxx'
+
+# Regions
+main-region                 = 'eu-xxxxx-1'
+other-regions               = ['us-xxxx-1']
+
+# Either AWSControlTowerExecution (under Control Tower) 
+# or OrganizationAccountAccessRole (under plain AWS Organizations)
+cross-account-role          = "AWSControlTowerExecution"
+
+# The email domain to use for notifications
+email-domain                = 'example.com'
+
+
+
+# ==========================================================================
+# Only specialised configuration below this point
+# ==========================================================================
+
+# The custom event bus used to send events to the SOAR
+custom-event-bus-name             = 'SOAR-events'
+
+# Tags for public bucket requests
+soar-s3-request-publicly-readable = 'soar:s3:request-publicly-readable'
+soar-s3-request-publicly-writable = 'soar:s3:request-publicly-writable'
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR
+#
+# --------------------------------------------------------------
+
+[SOAR.SAM]
+
+OrgAccountId           = "{admin-account}"
+SecurityAccountId      = "{security-account}"
+LogArchiveAccountId    = "{log-archive-account}"
+AFTManagementAccountId = "{aft-management-account}"
+
+CrossAccountRole       = "{cross-account-role}"
+CustomEventBusName     = "{custom-event-bus-name}"
+
+DiskForensicsInvokeARN = ""                                        # Configure this
+
+MinAgeHours               = 24                                     # Configure this
+ClearAccountDataCacheRate = "6 hours"                              # Configure this
+
+
+# Mail ----------------------------------------------------------------------------
+
+SendEmail        = "Yes"                                           # Configure this
+EmailCC          = "soc@example.com"                               # Configure this
+EmailBCC         = ""                                              # Configure this
+
+EmailSender      = "no-reply@{email-domain}"
+EmailReturnPath  = "no-reply@{email-domain}"
+
+# Ticketing -------------------------------------------------------------------------
+
+TicketingSystem                           = "JIRA"                    # Configure this
+DefaultTeamEmail                          = ""                        # Configure this
+
+JiraDefaultProjectKey                     = "INFRA"                   # Configure this
+
+JiraServerUrlParameterPath                = "/soar/jira/server-url" 
+JiraBasicAuthUsernameParameterPath        = "/soar/jira/basic-auth/username" 
+JiraBasicAuthTokenParameterPath           = "/soar/jira/basic-auth/token" 
+JiraIssueType                             = "Task" 
+JiraPriorities                            = "Lowest,Low,Medium,High,Highest" 
+JiraInitialStates                         = "Selected for Development" 
+JiraFinalState                            = "Done" 
+
+ServiceNowTable                           = "incidents"            # Configure this
+ServiceNowDefaultProjectQueue             = "XXX"                  # Configure this
+
+ServiceNowServerUrlParameterPath          = "/soar/service-now/server-url" 
+ServiceNowBasicAuthUsernameParameterPath  = "/soar/service-now/basic-auth/username" 
+ServiceNowBasicAuthPasswordParameterPath  = "/soar/service-now/basic-auth/password" 
+ServiceNowIssueType                       = "Incident" 
+ServiceNowFinalState                      = "7" 
+
+GuardDutyEc2TerminationSeverities         = "MEDIUM,HIGH,CRITICAL" 
+GuardDutyEc2NotificationSeverities        = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITICAL" 
+GuardDutyIamUserNotificationSeverities    = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITICAL" 
+GuardDutyS3NotificationSeverities         = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITICAL" 
+GuardDutyEksNotificationSeverities        = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITICAL" 
+
+IncidentsToSoc                            = "INFRA"                 # Configure this
+SocJiraProjectKeyOrServiceNowQueue        = "SOC"                   # Configure this
+
+SocTicketSeverities                       = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITICAL" 
+GenericNotificationSeverities             = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITICAL"
+
+IgnoreProducts                            = "Inspector,Systems Manager Patch Manager" 
+
+# Tag keys -------------------------------------------------------------------------
+
+AccountTeamEmailTag              = "soar:team:email" 
+AccountTeamEmailTagApp           = "soar:team:email:app" 
+
+JiraProjectKeyTag                = "soar:jira:project-key"
+JiraProjectKeyTagApp             = "soar:jira:project-key:app" 
+
+ServiceNowProjectQueueTag        = "soar:service-now:project-queue" 
+ServiceNowProjectQueueTagApp     = "soar:service-now:project-queue:app" 
+
+ProjectTag                       = "soar:project" 
+ClientTag                        = "soar:client" 
+TeamTag                          = "soar:team" 
+EnvironmentTag                   = "soar:environment" 
+
+RequestPubliclyReadableBucketTag = "{soar-s3-request-publicly-readable}" 
+RequestPubliclyWritableBucketTag = "{soar-s3-request-publicly-writable}" 
+
+DynamoDbNoPitRecoveryTag         = "soar:dynamodb:no-pit-recovery" 
+
+# Overdue Ticket Limits ------------------------------------------------------
+
+SeverityAllowedAgeInHoursCritical = 4                         # Configure this
+SeverityAllowedAgeInHoursHigh     = 8                         # Configure this
+SeverityAllowedAgeInHoursMedium   = 336                       # Configure this
+SeverityAllowedAgeInHoursLow      = 672                       # Configure this
+
+# Closed Ticket, Autoremediation, and Incident expiration times --------------
+
+ClosedTicketExpirationInDays    = 365                         # Configure this
+AutoremediationExpirationInDays = 365                         # Configure this
+IncidentExpirationInDays        = 365                         # Configure this
+
+# AI -------------------------------------------------------------------------
+
+UseChatGPT                       = "No"                        # Configure this
+
+ChatGPTIaCSnippets               = "Cloudformation YAML, Terraform, and Python CDK"
+
+ChatGPTAnonymizeAccountNumbers   = "Yes"
+ChatGPTAnonymizeHexStrings       = "Yes"
+ChatGPTRemoveARNs                = "No"
+ChatGPTRemoveEmailAddresses      = "Yes"
+
+WeeklyReport                     = "No"                        # Configure this
+WeeklyReportEmailRecipients      = "someone@example.com"       # Configure this
+
+WeeklyReportIndividualAccounts   = "Yes"                       # Configure this
+
+ChatGPTDefaultModel              = "gpt-4" 
+ChatGPTFallbackModel             = "gpt-3.5-turbo-16k" 
+ChatGPTAPIKeyParameterPath       = "/soar/chatgpt/api-key" 
+
+WeeklyReportChatGPTDefaultModel  = "gpt-4" 
+WeeklyReportChatGPTFallbackModel = "gpt-3.5-turbo-16k" 
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-detect-log-buckets
+#
+# --------------------------------------------------------------
+
+[SOAR-detect-log-buckets.INFRA-log-archive-buckets]
+
+OrgId                       = '{org-id}'
+
+
+[SOAR-detect-log-buckets.INFRA-s3-log-replication-source-account-role]
+
+CloudFrontLogsBucketName    = "cloudfront-logs-{log-archive-account}-{main-region}"
+LoadBalancerLogsBucketName  = "load-balancer-logs-{log-archive-account}-{main-region}"
+
+
+[SOAR-detect-log-buckets.INFRA-detect-bucket-lifecycle]
+
+OrganizationAccountNumber   = '{admin-account}'
+CustomEventBusName          = '{custom-event-bus-name}'
+
+
+[SOAR-detect-log-buckets.SAM]
+
+CrossAccountRole            = "{cross-account-role}"
+CustomEventBusName          = '{custom-event-bus-name}'
+LogArchiveAccountId         = "{log-archive-account}"
+CloudFrontLogsBucketName    = "cloudfront-logs-{log-archive-account}-{main-region}"
+LoadBalancerLogsBucketName  = "load-balancer-logs-{log-archive-account}-{main-region}"
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-sec-hub-configuration
+#
+# --------------------------------------------------------------
+
+[SOAR-sec-hub-configuration.INFRA-sec-hub-custom-event-bus]
+
+OrgId                       = '{org-id}'
+CustomEventBusName          = '{custom-event-bus-name}'
+
+
+[SOAR-sec-hub-configuration.SAM]
+
+OrganizationAccountNumber          = "{admin-account}"
+SecurityAccountNumber              = "{security-account}"
+NewAccountCreatedSnsTopicArn       = "arn:aws:sns:{main-region}:{admin-account}:new-account-created"
+NewAccountCreatedSnsTopicArnRegion = "{main-region}"
+CustomEventBusName                 = '{custom-event-bus-name}'
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-sec-hub-role
+#
+# --------------------------------------------------------------
+
+[SOAR-sec-hub-role.INFRA-sec-hub-role]
+
+OrganisationAccountID = '{admin-account}'
+SecurityAccountID     = '{security-account}'
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-all-alarms-to-sec-hub
+#
+# --------------------------------------------------------------
+
+[SOAR-all-alarms-to-sec-hub.SAM]
+
+
+[SOAR-all-alarms-to-sec-hub.INFRA-local-alarm-events-to-sec-hub-bus]
+
+SecurityAccountNumber       = '{security-account}'
+PrincipalOrgID              = '{org-id}'
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-detect-stack-drift
+#
+# --------------------------------------------------------------
+
+[SOAR-detect-stack-drift.SAM]
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-soc-incident-when-s3-tag-applied  
+#
+# --------------------------------------------------------------
+
+[SOAR-soc-incident-when-s3-tag-applied.SAM]
+
+CrossAccountRole              = "{cross-account-role}"
+CustomEventBusName            = '{custom-event-bus-name}'
+RequestPubliclyAccessibleTags = "{soar-s3-request-publicly-readable},{soar-s3-request-publicly-writable}"
+
+
+[SOAR-soc-incident-when-s3-tag-applied.INFRA-detect-bucket-tagging]
+
+OrganizationAccountNumber     = "{admin-account}"
+CustomEventBusName            = '{custom-event-bus-name}'
+
+
+
+# --------------------------------------------------------------
+#
+# SOAR-SAM-Automating-Forensic-Disk-Collection  
+#
+# --------------------------------------------------------------
+
+[SOAR-SAM-Automating-Forensic-Disk-Collection.INFRA-diskForensicImageBuilder]
+
+IAMRegion = '{main-region}'
+
+
+[SOAR-SAM-Automating-Forensic-Disk-Collection.SAM]
+
+ORGID                              = '{org-id}'
+ArtifactBucketName                 = 'Delegat-SOAR-forensic-artifacts'
+ArtifactBucketExpirationInDays     = 3650
+ForensicsAMI                       = 'ami-000000000000'  # update this
+AllowInvokeFromAccountId           = '{admin-account}'
+TerminateRogueAfterInitialSnapshot = 'Yes'
+
+
+[SOAR-SAM-Automating-Forensic-Disk-Collection.INFRA-diskMember]
+
+MasterAccountNum = '{security-account}'

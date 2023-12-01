@@ -1,0 +1,25 @@
+account_id: "{admin-account}"
+
+sso_groups:
+  cloud-administration:
+    - AWSAdministratorAccess
+    - AWSReadOnlyAccess
+  security-administration:
+    - AWSReadOnlyAccess
+
+  account-administration:
+    - AWSServiceCatalogAdminFullAccess
+  cost-management:
+    - BillingAccess
+
+  AWSControlTowerAdmins:
+    - AWSAdministratorAccess
+  AWSSecurityAuditPowerUsers:
+    - AWSPowerUserAccess
+  AWSSecurityAuditors:
+    - AWSReadOnlyAccess
+  AWSServiceCatalogAdmins:
+    - AWSServiceCatalogAdminFullAccess
+  AWSAccountFactory:
+    - AWSServiceCatalogEndUserAccess
+

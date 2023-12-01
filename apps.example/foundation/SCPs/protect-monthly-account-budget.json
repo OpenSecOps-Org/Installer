@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ProtectMonthlyAccountBudget",
+      "Effect": "Deny",
+      "Action": [
+        "budgets:Create*",
+        "budgets:Delete*",
+        "budgets:Update*"
+      ],
+      "Resource": [
+        "arn:aws:budgets::*:budget/monthly-account-budget"
+      ],
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/AWSControlTowerExecution",
+            "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+            "arn:aws:iam::*:role/stacksets-exec-*"
+          ]
+        }
+      }
+    }
+  ]
+}
