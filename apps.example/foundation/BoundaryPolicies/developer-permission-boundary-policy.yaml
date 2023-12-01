@@ -1,0 +1,130 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description:
+  This is the boundary policy that developers need to attach to all roles
+  they create. The permissions are further restricted by SCPs.
+
+Resources:
+
+  DeveloperPermissionBoundaryPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties: 
+      Description: 
+        This is the boundary policy that developers need to attach to all roles
+        they create. The permissions are further restricted by SCPs.
+      ManagedPolicyName: developer-permission-boundary-policy
+      Path: /
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - 
+          Sid: AllowGlobalServices
+          Effect: Allow
+          Resource: "*"
+          Action:
+            - cloudfront:*
+            - iam:*
+            - route53:*
+            - route53domains:*
+        - 
+          Sid: AllowLocalServicesInStockholm
+          Effect: Allow
+          Resource: "*"
+          Condition:
+            StringEquals:
+              aws:RequestedRegion: eu-north-1
+          Action:
+            - acm:*
+            - apigateway:*
+            - apigatewayv2:*
+            - application-autoscaling:*
+            - appmesh:*
+            - autoscaling:*
+            - cloudformation:*
+            - cloudtrail:*
+            - cloudwatch:*
+            - codebuild:*
+            - codecommit:*
+            - codedeploy:*
+            - codepipeline:*
+            - codestar:*
+            - config:*
+            - datapipeline:*
+            - dax:*
+            - ds:*
+            - dynamodb:*
+            - ec2:*
+            - ec2messages:*
+            - ecr:*
+            - ecs:*
+            - elasticache:*
+            - elasticbeanstalk:*
+            - elasticfilesystem:*
+            - elasticloadbalancing:*
+            - events:*
+            - firehose:*
+            - fsx:*
+            - glacier:*
+            - inspector:*
+            - kinesis:*
+            - kms:*
+            - lambda:*
+            - logs:*
+            - organizations:Describe*
+            - organizations:List*
+            - outposts:*
+            - pi:*
+            - rds:*
+            - resource-groups:*
+            - s3-object-lambda:*
+            - s3:*
+            - secretsmanager:*
+            - servicediscovery:*
+            - sns:*
+            - sqs:*
+            - ssm:*
+            - ssmmessages:*
+            - states:*
+            - sts:*
+            - tag:*
+            - xray:*
+        - 
+          Sid: DenyDeeperNetworkMutation
+          Effect: Deny
+          Resource: "*"
+          Action:
+            - ec2:AcceptTransitGateway*
+            - ec2:AcceptVpcPeeringConnection
+            - ec2:ApplySecurityGroupsToClientVpnTargetNetwork
+            - ec2:AssociateClientVpnTargetNetwork
+            - ec2:AssociateTransitGateway*
+            - ec2:AttachClassicLinkVpc
+            - ec2:AttachVpnGateway
+            - ec2:AuthorizeClientVpnIngress
+            - ec2:CreateClientVpn*
+            - ec2:CreateCustomerGateway
+            - ec2:CreateTransitGateway*
+            - ec2:CreateVpcPeeringConnection
+            - ec2:CreateVpn*
+            - ec2:CreateClientVpn*
+            - ec2:DeleteClientVpn*
+            - ec2:DeleteTransitGateway*
+            - ec2:DeleteVpcPeeringConnection
+            - ec2:DeleteVpn*
+            - ec2:DeregisterTransitGateway*
+            - ec2:DetachVpnGateway
+            - ec2:DisableTransitGateway*
+            - ec2:DisassociateTransitGateway*
+            - ec2:DisassociateTrunkInterface
+            - ec2:EnableTransitGateway*
+            - ec2:ImportClientVpn*
+            - ec2:ModifyTransitGateway*
+            - ec2:ModifyVpcPeering*
+            - ec2:ModifyVpn*
+            - ec2:RegisterTransitGateway*
+            - ec2:RejectTransitGateway*
+            - ec2:RejectVpcPeering*
+            - ec2:ReplaceTransitGatewayRoute
+            - ec2:RevokeClientVpn*
+            - ec2:TerminateClientVpn*
+

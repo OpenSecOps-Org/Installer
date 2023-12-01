@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  This is the boundary policy that Security Administrators need to attach
+  to all roles they create. The permissions are further restricted by SCPs.
+Resources:
+  SecurityAdministratorPermissionBoundaryPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description:
+        This is the boundary policy that Security Administrators need to
+        attach to all roles they create. The permissions are further restricted by SCPs.
+      ManagedPolicyName: security-administrator-permission-boundary-policy
+      Path: "/"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - 
+            Effect: Allow
+            NotAction:
+              # - iam:*
+              - organizations:*
+              - account:*
+            Resource: "*"
+          - 
+            Effect: Allow
+            Action:
+              # - iam:CreateServiceLinkedRole
+              # - iam:DeleteServiceLinkedRole
+              # - iam:ListRoles
+              - organizations:DescribeOrganization
+              - account:ListRegions
+            Resource: "*"
