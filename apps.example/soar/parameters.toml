@@ -55,6 +55,8 @@ DiskForensicsInvokeARN = ""                                        # Configure t
 MinAgeHours               = 24                                     # Configure this
 ClearAccountDataCacheRate = "6 hours"                              # Configure this
 
+DeferTeamFixes            = "No"                                   # Configure this
+
 
 # Mail ----------------------------------------------------------------------------
 
