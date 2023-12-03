@@ -212,9 +212,6 @@ CustomEventBusName          = '{custom-event-bus-name}'
 [SOAR-sec-hub-configuration.SAM]
 
 OrganizationAccountNumber          = "{admin-account}"
-SecurityAccountNumber              = "{security-account}"
-NewAccountCreatedSnsTopicArn       = "arn:aws:sns:{main-region}:{admin-account}:new-account-created"
-NewAccountCreatedSnsTopicArnRegion = "{main-region}"
 CustomEventBusName                 = '{custom-event-bus-name}'
 
 
