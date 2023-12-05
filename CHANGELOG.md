@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.5
+    * Updated apps.example
+
 ## v1.1.4
     * Updated apps.example
 

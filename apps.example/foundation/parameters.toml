@@ -198,8 +198,8 @@ SubscribeSchedule  = 'rate(1 hour)'
 [Foundation-control-tower-log-aggregator.SAM]
 
 ControlTowerBucket                = 'aws-controltower-logs-{log-archive-account}-{main-region}'
-ControlTowerBucketAccessLogBucket = 'aws-controltower-s3-access-logs-{log-archive-account}-{main-region}'
-OtherBuckets                      = 'aws-aft-logs-,aws-aft-s3-access-logs-,infra-cloudwatch2s3-logbucket-,cloudfront-logs-,cloudfront-s3-access-logs-,load-balancer-logs-,load-balancer-s3-access-logs-'
+ControlTowerBucketAccessLogBucket = ''
+OtherBuckets                      = 'aws-controltower-s3-access-logs-{log-archive-account}-{main-region},aws-aft-logs-,aws-aft-s3-access-logs-,infra-cloudwatch2s3-logbucket-,cloudfront-logs-,cloudfront-s3-access-logs-,load-balancer-logs-,load-balancer-s3-access-logs-'
 FinalAggregationPrefix            = 'AggregatedLogs'
 OrganizationId                    = '{org-id}'
 UseCommonDestinationBucket        = 'Yes'
