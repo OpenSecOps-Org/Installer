@@ -141,26 +141,28 @@ IncidentExpirationInDays        = 365                         # Configure this
 
 # AI -------------------------------------------------------------------------
 
-UseChatGPT                       = "No"                        # Configure this
+UseChatGPT                         = "No"                        # Configure this
 
-ChatGPTIaCSnippets               = "Cloudformation YAML, Terraform, and Python CDK"
+ChatGPTIaCSnippets                 = "Cloudformation YAML, Terraform, and Python CDK"
 
-ChatGPTAnonymizeAccountNumbers   = "Yes"
-ChatGPTAnonymizeHexStrings       = "Yes"
-ChatGPTRemoveARNs                = "No"
-ChatGPTRemoveEmailAddresses      = "Yes"
+ChatGPTAnonymizeAccountNumbers     = "Yes"
+ChatGPTAnonymizeHexStrings         = "Yes"
+ChatGPTRemoveARNs                  = "No"
+ChatGPTRemoveEmailAddresses        = "Yes"
 
-WeeklyReport                     = "No"                        # Configure this
-WeeklyReportEmailRecipients      = "someone@example.com"       # Configure this
+WeeklyReport                       = "No"                        # Configure this
+WeeklyReportEmailRecipients        = "someone@example.com"       # Configure this
 
-WeeklyReportIndividualAccounts   = "Yes"                       # Configure this
+WeeklyReportIndividualAccounts     = "Yes"                       # Configure this
 
-ChatGPTDefaultModel              = "gpt-4" 
-ChatGPTFallbackModel             = "gpt-3.5-turbo-16k" 
-ChatGPTAPIKeyParameterPath       = "/soar/chatgpt/api-key" 
+ChatGPTDefaultModel                = "gpt-4" 
+ChatGPTFallbackModel               = "gpt-3.5-turbo-16k" 
 
-WeeklyReportChatGPTDefaultModel  = "gpt-4" 
-WeeklyReportChatGPTFallbackModel = "gpt-3.5-turbo-16k" 
+ChatGPTOrganizationIdParameterPath = "/soar/chatgpt/organization-id"
+ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key" 
+
+WeeklyReportChatGPTDefaultModel    = "gpt-4" 
+WeeklyReportChatGPTFallbackModel   = "gpt-3.5-turbo-16k" 
 
 
 

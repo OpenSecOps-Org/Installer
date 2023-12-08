@@ -78,6 +78,7 @@ inline_policy:
               - ec2messages:*
               - ecr:*
               - ecs:*
+              - eks:*
               - elasticache:*
               - elasticbeanstalk:*
               - elasticfilesystem:*

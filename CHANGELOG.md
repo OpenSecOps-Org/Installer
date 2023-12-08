@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.1.7
+    * Added the ChatGPTOrganizationIdParameterPath parameter
+
+## v1.1.6
+    * Added EKS permissions to DeveloperAccess and developer-permission-boundary-policy.
+
 ## v1.1.5
     * Updated apps.example
 
