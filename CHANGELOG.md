@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.8
+    * Added the SOAREnabled parameter
+
 ## v1.1.7
     * Added the ChatGPTOrganizationIdParameterPath parameter
 

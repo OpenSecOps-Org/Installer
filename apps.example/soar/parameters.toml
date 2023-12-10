@@ -42,6 +42,8 @@ soar-s3-request-publicly-writable = 'soar:s3:request-publicly-writable'
 
 [SOAR.SAM]
 
+SOAREnabled            = 'Yes'                                     # Configure this
+
 OrgAccountId           = "{admin-account}"
 SecurityAccountId      = "{security-account}"
 LogArchiveAccountId    = "{log-archive-account}"
