@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.9
+    * Added the DeferIncidents and DeferAutoRemediations parameters.
+
 ## v1.1.8
     * Added the SOAREnabled parameter
 

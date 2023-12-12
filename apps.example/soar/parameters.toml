@@ -43,6 +43,9 @@ soar-s3-request-publicly-writable = 'soar:s3:request-publicly-writable'
 [SOAR.SAM]
 
 SOAREnabled            = 'Yes'                                     # Configure this
+DeferIncidents         = "No"                                      # Configure this
+DeferTeamFixes         = "No"                                      # Configure this
+DeferAutoRemediations  = "No"                                      # Configure this
 
 OrgAccountId           = "{admin-account}"
 SecurityAccountId      = "{security-account}"
@@ -56,9 +59,6 @@ DiskForensicsInvokeARN = ""                                        # Configure t
 
 MinAgeHours               = 24                                     # Configure this
 ClearAccountDataCacheRate = "6 hours"                              # Configure this
-
-DeferTeamFixes            = "No"                                   # Configure this
-
 
 # Mail ----------------------------------------------------------------------------
 
