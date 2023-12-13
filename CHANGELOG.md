@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.10
+    * Swapped two settings for clarity.
+
 ## v1.1.9
     * Added the DeferIncidents and DeferAutoRemediations parameters.
 

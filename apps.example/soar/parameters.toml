@@ -44,8 +44,8 @@ soar-s3-request-publicly-writable = 'soar:s3:request-publicly-writable'
 
 SOAREnabled            = 'Yes'                                     # Configure this
 DeferIncidents         = "No"                                      # Configure this
-DeferTeamFixes         = "No"                                      # Configure this
 DeferAutoRemediations  = "No"                                      # Configure this
+DeferTeamFixes         = "No"                                      # Configure this
 
 OrgAccountId           = "{admin-account}"
 SecurityAccountId      = "{security-account}"
