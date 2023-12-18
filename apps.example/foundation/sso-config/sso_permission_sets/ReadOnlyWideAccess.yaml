@@ -1,4 +1,5 @@
-permission_set_name: ReadOnlyWideAccess
+permission_set_name: 
+    ReadOnlyWideAccess
 
 description:
     A read-only permission set with extended permissions compared to ViewOnlyAccess.

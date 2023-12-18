@@ -1,9 +1,10 @@
-permission_set_name: SecurityAdministratorAccess
+permission_set_name: 
+SecurityAdministratorAccess
 
 description:
-  Provides full access to AWS services and resources, but does not allow management
-  of IAM Users and IAM Groups. The rights are further restricted by Service Control 
-  Policies (SCPs) that protect the Foundational configuration.
+  Provides full access to AWS services and resources. However, the rights are 
+  further restricted by Service Control Policies (SCPs) that protect the 
+  Foundational configuration and blocks the creation of IAM Users, etc.
 
 session_duration: PT8H
 
@@ -16,18 +17,5 @@ inline_policy:
   Statement:
     - 
       Effect: Allow
-      NotAction:
-        - iam:*
-        - organizations:*
-        - account:*
-      Resource: "*"
-    - 
-      Effect: Allow
-      Action:
-        - account:GetAccountInformation
-        - account:ListRegions
-        - iam:CreateServiceLinkedRole
-        - iam:DeleteServiceLinkedRole
-        - iam:ListRoles
-        - organizations:DescribeOrganization
+      Action: "*"
       Resource: "*"

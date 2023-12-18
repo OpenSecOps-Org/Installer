@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.11
+    * Widened the Security Administrator role.
+
 ## v1.1.10
     * Swapped two settings for clarity.
 
