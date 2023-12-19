@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.12
+    * Added the auditor group and substituted ReadOnlyWideAccess where applicable.
+
 ## v1.1.11
     * Widened the Security Administrator role.
 

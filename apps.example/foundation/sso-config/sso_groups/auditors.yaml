@@ -1,0 +1,6 @@
+sso_group_name: 
+  auditors
+  
+description:
+  Members of this group have very wide read-only access to accounts, suitable for
+  CISOs, CTOs, etc.

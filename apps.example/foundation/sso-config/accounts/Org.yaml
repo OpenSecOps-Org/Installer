@@ -4,20 +4,21 @@ sso_groups:
   cloud-administration:
     - AWSAdministratorAccess
     - ReadOnlyWideAccess
-  security-administration:
-    - ReadOnlyWideAccess
 
   account-administration:
     - AWSServiceCatalogAdminFullAccess
   cost-management:
     - BillingAccess
 
+  auditors:
+    - ReadOnlyWideAccess
+
   AWSControlTowerAdmins:
     - AWSAdministratorAccess
   AWSSecurityAuditPowerUsers:
     - AWSPowerUserAccess
   AWSSecurityAuditors:
-    - ReadOnlyWideAccess
+    - AWSReadOnlyAccess
   AWSServiceCatalogAdmins:
     - AWSServiceCatalogAdminFullAccess
   AWSAccountFactory:

@@ -4,8 +4,7 @@ sso_groups:
   cloud-administration:
     - AWSAdministratorAccess
     - ReadOnlyWideAccess
-  security-administration:
-    - SecurityAdministratorAccess
+  auditors:
     - ReadOnlyWideAccess
 
   AWSControlTowerAdmins:
@@ -13,9 +12,9 @@ sso_groups:
   AWSLogArchiveAdmins:
     - AWSAdministratorAccess
   AWSLogArchiveViewers:
-    - ReadOnlyWideAccess
+    - AWSReadOnlyAccess
   AWSSecurityAuditPowerUsers:
     - AWSPowerUserAccess
   AWSSecurityAuditors:
-    - ReadOnlyWideAccess
+    - AWSReadOnlyAccess
 
