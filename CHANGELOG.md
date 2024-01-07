@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.13
+    * Added SkipTheseStacks to SOAR-detect-stack-drift.
+
 ## v1.1.12
     * Added the auditor group and substituted ReadOnlyWideAccess where applicable.
 
