@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.14
+    * Added EscalationEmailCC for overdue ticket reminders.
+
 ## v1.1.13
     * Added SkipTheseStacks to SOAR-detect-stack-drift.
 
