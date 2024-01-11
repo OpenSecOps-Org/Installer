@@ -135,7 +135,8 @@ SeverityAllowedAgeInHoursHigh     = 8                         # Configure this
 SeverityAllowedAgeInHoursMedium   = 336                       # Configure this
 SeverityAllowedAgeInHoursLow      = 672                       # Configure this
 
-EscalationEmailCC = ''                                        # Configure this
+EscalationEmailCC = 'escalators@example.com'                  # Configure this
+EscalationEmailSeverities = 'CRITICAL,HIGH,MEDIUM,LOW'        # Configure this
 
 # Closed Ticket, Autoremediation, and Incident expiration times --------------
 

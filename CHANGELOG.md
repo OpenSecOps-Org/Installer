@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.15
+    * Added EscalationEmailSeverities.
+
 ## v1.1.14
     * Added EscalationEmailCC for overdue ticket reminders.
 
