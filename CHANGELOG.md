@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.16
+    * Added DashboardName.
+
 ## v1.1.15
     * Added EscalationEmailSeverities.
 

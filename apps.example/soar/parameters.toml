@@ -169,6 +169,10 @@ ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key"
 WeeklyReportChatGPTDefaultModel    = "gpt-4" 
 WeeklyReportChatGPTFallbackModel   = "gpt-3.5-turbo-16k" 
 
+# Dashboard -------------------------------------------------------------------
+
+DashboardName = 'Delegat_SOAR'   # Use 'CloudWatch-Default' to make it the default dashboard
+
 
 
 # --------------------------------------------------------------
