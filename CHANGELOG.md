@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.17
+    * New version of the ./publish script.
+
 ## v1.1.16
     * Added DashboardName.
 
