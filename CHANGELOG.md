@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.18
+    * Excepting `AWSControlTowerExecutionRole` from drift detection.
+
 ## v1.1.17
     * New version of the ./publish script.
 
