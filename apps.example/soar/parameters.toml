@@ -171,7 +171,8 @@ WeeklyReportChatGPTFallbackModel   = "gpt-3.5-turbo-16k"
 
 # Dashboard -------------------------------------------------------------------
 
-DashboardName = 'Delegat_SOAR'   # Use 'CloudWatch-Default' to make it the default dashboard
+DashboardName     = 'Delegat_SOAR_Security_Status'       # Use 'CloudWatch-Default' to make it the default dashboard
+DashboardNameExec = 'Delegat_SOAR_Execution_Dashboard'   # Use 'CloudWatch-Default' to make it the default dashboard
 
 
 

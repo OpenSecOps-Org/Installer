@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.19
+    * Added DashboardNameExec.
+
 ## v1.1.18
     * Excepting `AWSControlTowerExecutionRole` from drift detection.
 
