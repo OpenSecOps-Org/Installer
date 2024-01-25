@@ -107,6 +107,10 @@ GenericNotificationSeverities             = "INFORMATIONAL,LOW,MEDIUM,HIGH,CRITI
 
 IgnoreProducts                            = "Inspector,Systems Manager Patch Manager" 
 
+# Microsoft Sentinel for Incidents -------------------------------------------------
+
+IncidentsToSentinel                       = 'NONE'        # NONE / INFRA / APP / ALL
+
 # Tag keys -------------------------------------------------------------------------
 
 AccountTeamEmailTag              = "soar:team:email" 

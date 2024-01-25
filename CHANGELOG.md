@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.20
+    * Added support for MS Sentinel for incidents.
+
 ## v1.1.19
     * Added DashboardNameExec.
 
