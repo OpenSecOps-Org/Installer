@@ -161,6 +161,7 @@ ChatGPTRemoveEmailAddresses        = "Yes"
 
 WeeklyReport                       = "No"                        # Configure this
 WeeklyReportEmailRecipients        = "someone@example.com"       # Configure this
+WeeklyReportWeekNumbers            = "ISO"                       # 'ISO' or 'No'
 
 WeeklyReportIndividualAccounts     = "Yes"                       # Configure this
 
