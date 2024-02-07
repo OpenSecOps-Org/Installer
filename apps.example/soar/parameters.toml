@@ -55,7 +55,7 @@ AFTManagementAccountId = "{aft-management-account}"
 CrossAccountRole       = "{cross-account-role}"
 CustomEventBusName     = "{custom-event-bus-name}"
 
-DiskForensicsInvokeARN = ""                                        # Configure this
+DiskForensicsInvoke    = "Yes"                                     # Configure this
 
 MinAgeHours               = 24                                     # Configure this
 ClearAccountDataCacheRate = "6 hours"                              # Configure this
@@ -309,7 +309,7 @@ IAMRegion = '{main-region}'
 [SOAR-SAM-Automating-Forensic-Disk-Collection.SAM]
 
 ORGID                              = '{org-id}'
-ArtifactBucketName                 = 'Delegat-SOAR-forensic-artifacts'
+ArtifactBucketName                 = 'delegat-soar-forensic-artifacts'
 ArtifactBucketExpirationInDays     = 3650
 ForensicsAMI                       = 'ami-000000000000'  # update this
 AllowInvokeFromAccountId           = '{admin-account}'

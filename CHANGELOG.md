@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.1.24
+    * DiskForensicsInvoke now controls EC2 snapshotting. DiskForensicsInvokeARN is no
+      longer supported.
+
 ## v1.1.23
     * Added support for IncidentSeverity.
 
