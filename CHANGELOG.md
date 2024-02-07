@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.22
+    * Added support for WeeklyReportTitle.
+
 ## v1.1.21
     * Added support for WeeklyReportWeekNumbers.
 

@@ -161,9 +161,10 @@ ChatGPTRemoveEmailAddresses        = "Yes"
 
 WeeklyReport                       = "No"                        # Configure this
 WeeklyReportEmailRecipients        = "someone@example.com"       # Configure this
-WeeklyReportWeekNumbers            = "ISO"                       # 'ISO' or 'No'
-
 WeeklyReportIndividualAccounts     = "Yes"                       # Configure this
+
+WeeklyReportTitle                  = "Delegat SOAR Weekly Security Report"
+WeeklyReportWeekNumbers            = "ISO"                       # 'ISO' or 'No'
 
 ChatGPTDefaultModel                = "gpt-4" 
 ChatGPTFallbackModel               = "gpt-3.5-turbo-16k" 
