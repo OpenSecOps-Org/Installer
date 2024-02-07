@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.23
+    * Added support for IncidentSeverity.
+
 ## v1.1.22
     * Added support for WeeklyReportTitle.
 
