@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.26
+    * Default AI model changed to gpt-4-turbo-preview.
+
 ## v1.1.25
     * ForensicsAMI is now ForensicsAMIs and a map.
 

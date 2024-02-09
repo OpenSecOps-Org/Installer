@@ -166,13 +166,13 @@ WeeklyReportIndividualAccounts     = "Yes"                       # Configure thi
 WeeklyReportTitle                  = "Delegat SOAR Weekly Security Report"
 WeeklyReportWeekNumbers            = "ISO"                       # 'ISO' or 'No'
 
-ChatGPTDefaultModel                = "gpt-4" 
+ChatGPTDefaultModel                = "gpt-4-turbo-preview" 
 ChatGPTFallbackModel               = "gpt-3.5-turbo-16k" 
 
 ChatGPTOrganizationIdParameterPath = "/soar/chatgpt/organization-id"
 ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key" 
 
-WeeklyReportChatGPTDefaultModel    = "gpt-4" 
+WeeklyReportChatGPTDefaultModel    = "gpt-4-turbo-preview4" 
 WeeklyReportChatGPTFallbackModel   = "gpt-3.5-turbo-16k" 
 
 # Dashboard -------------------------------------------------------------------
