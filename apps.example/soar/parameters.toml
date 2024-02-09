@@ -311,7 +311,7 @@ IAMRegion = '{main-region}'
 ORGID                              = '{org-id}'
 ArtifactBucketName                 = 'delegat-soar-forensic-artifacts'
 ArtifactBucketExpirationInDays     = 3650
-ForensicsAMI                       = 'ami-000000000000'  # update this
+ForensicsAMIs                      = "us-east-1: ami-000000000000, eu-west-1: ami-1111111111111"  # update this
 AllowInvokeFromAccountId           = '{admin-account}'
 TerminateRogueAfterInitialSnapshot = 'Yes'
 

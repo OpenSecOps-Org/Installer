@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.25
+    * ForensicsAMI is now ForensicsAMIs and a map.
+
 ## v1.1.24
     * DiskForensicsInvoke now controls EC2 snapshotting. DiskForensicsInvokeARN is no
       longer supported.
