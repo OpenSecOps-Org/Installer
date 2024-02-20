@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.27
+    * Added DevEnvNames, StagingEnvNames, and ProdEnvNames.
+
 ## v1.1.26
     * Default AI model changed to gpt-4-turbo-preview.
 

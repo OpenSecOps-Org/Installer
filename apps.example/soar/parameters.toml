@@ -180,6 +180,12 @@ WeeklyReportChatGPTFallbackModel   = "gpt-3.5-turbo-16k"
 DashboardName     = 'Delegat_SOAR_Security_Status'       # Use 'CloudWatch-Default' to make it the default dashboard
 DashboardNameExec = 'Delegat_SOAR_Execution_Dashboard'   # Use 'CloudWatch-Default' to make it the default dashboard
 
+# Environment names -----------------------------------------------------------
+
+DevEnvNames     = 'DEV, DEVELOPMENT, DEVINT, DI'
+StagingEnvNames = 'STAGING, STG, PREPROD, PP, TEST, TESTING, QA, UAT, SIT, SYSTEMTEST, INTEGRATION'
+ProdEnvNames    = 'PROD, PRD, PRODUCTION, LIVE'
+
 
 
 # --------------------------------------------------------------
