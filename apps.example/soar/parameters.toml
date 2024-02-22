@@ -320,6 +320,7 @@ ArtifactBucketExpirationInDays     = 3650
 ForensicsAMIs                      = "us-east-1: ami-000000000000, eu-west-1: ami-1111111111111"  # update this
 AllowInvokeFromAccountId           = '{admin-account}'
 TerminateRogueAfterInitialSnapshot = 'Yes'
+InstanceType                       = 'm5.large'
 
 
 [SOAR-SAM-Automating-Forensic-Disk-Collection.INFRA-diskMember]

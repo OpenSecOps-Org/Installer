@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.28
+    * Added support for InstanceType.
+
 ## v1.1.27
     * Added DevEnvNames, StagingEnvNames, and ProdEnvNames.
 
