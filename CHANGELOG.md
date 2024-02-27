@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.30
+    * Updated the deploy script for CloudFormation edge case.
+
 ## v1.1.29
     * Added support for InstanceTypeList.
 
