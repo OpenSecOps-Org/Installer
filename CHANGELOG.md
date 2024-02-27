@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.29
+    * Added support for InstanceTypeList.
+
 ## v1.1.28
     * Added support for InstanceType.
 

@@ -309,7 +309,8 @@ CustomEventBusName            = '{custom-event-bus-name}'
 
 [SOAR-SAM-Automating-Forensic-Disk-Collection.INFRA-diskForensicImageBuilder]
 
-IAMRegion = '{main-region}'
+IAMRegion        = '{main-region}'
+InstanceTypeList = 'm5.large,t3.large'
 
 
 [SOAR-SAM-Automating-Forensic-Disk-Collection.SAM]
