@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.1.31
+    * Added INFRA-SOAR to the list of stacks excepted from drift detection.
+      (System Manager Parameters changes always trigger drift.)
+
 ## v1.1.30
     * Updated the deploy script for CloudFormation edge case.
 
