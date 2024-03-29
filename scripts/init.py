@@ -18,7 +18,7 @@ def printc(color, string, **kwargs):
 
 
 def install_package(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    subprocess.check_call([sys.executable, "-m", "pip3", "install", package])
 
 
 def check_package(package):
@@ -82,7 +82,7 @@ def main():
     print()
 
     # Check for necessary software
-    necessary_software = ['aws', 'sam', 'python3', 'pip']
+    necessary_software = ['aws', 'sam', 'python3', 'pip3']
     for software in necessary_software:
         printc(YELLOW, f"Checking that {software} is installed... ", end="")
         if not check_software(software):

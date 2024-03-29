@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.1.32
+    * Using pip3 directly, not pip.
+
 ## v1.1.31
     * Added INFRA-SOAR to the list of stacks excepted from drift detection.
       (System Manager Parameters changes always trigger drift.)
