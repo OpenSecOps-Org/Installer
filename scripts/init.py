@@ -17,8 +17,26 @@ def printc(color, string, **kwargs):
     print(f"{color}{string}{END}", **kwargs)
 
 
-def install_package(package):
-    subprocess.check_call([sys.executable, "-m", "pip3", "install", package])
+def check_software(software):
+    try:
+        subprocess.check_call([software, '--version'], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return False
+    return True
+
+
+def get_required_python_version():
+    with open('.python-version', 'r') as file:
+        return file.read().strip()
+
+
+def setup_python_environment(required_version):
+    installed_versions = subprocess.check_output(['pyenv', 'versions', '--bare'], encoding='utf-8').splitlines()
+    if required_version not in installed_versions:
+        printc(YELLOW, f"Installing Python {required_version}... ", end="")
+        subprocess.check_call(['pyenv', 'install', required_version])
+        printc(GREEN, "OK")
+    subprocess.check_call(['pyenv', 'local', required_version])
 
 
 def check_package(package):
@@ -29,12 +47,20 @@ def check_package(package):
     return True
 
 
-def check_software(software):
-    try:
-        subprocess.check_call([software, '--version'], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        return False
-    return True
+def install_package(package):
+    subprocess.check_call([sys.executable, "-m", "pip3", "install", package])
+
+
+def install_python_packages():
+    # Check for necessary Python packages
+    necessary_packages = ['boto3', 'toml']
+    for package in necessary_packages:
+        printc(YELLOW, f"Checking that {package} is installed... ", end="")
+        if not check_package(package):
+            install_package(package)
+            printc(GREEN, f"{package} is now installed.")
+        else:
+            printc(GREEN, f"{package} is already installed.")
 
 
 def clone_repo(url, path):
@@ -45,6 +71,23 @@ def clone_repo(url, path):
         printc(YELLOW, f"\rDownloading repo {path}... ", end="")
         subprocess.run(['git', 'clone', url, path, '--quiet'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     printc(GREEN, "OK")
+
+     # Dynamically obtain the current working directory before any changes
+    original_dir = os.getcwd()
+    
+    try:
+        # Change to the repo directory only after successful cloning/updating
+        os.chdir(path)
+        
+        # Check and set up the Python environment for the repo
+        required_python_version = get_required_python_version()
+        setup_python_environment(required_python_version)
+        
+        # Install necessary Python packages for the repo
+        install_python_packages()
+    finally:
+        # Always revert to the original working directory
+        os.chdir(original_dir)
 
 
 def main():
@@ -82,7 +125,7 @@ def main():
     print()
 
     # Check for necessary software
-    necessary_software = ['aws', 'sam', 'python3', 'pip3']
+    necessary_software = ['aws', 'sam', 'pyenv', 'git']
     for software in necessary_software:
         printc(YELLOW, f"Checking that {software} is installed... ", end="")
         if not check_software(software):
@@ -90,23 +133,9 @@ def main():
             return
         printc(GREEN, "OK")
 
-    # Check for necessary Python packages
-    necessary_packages = ['boto3']
-    for package in necessary_packages:
-        printc(YELLOW, f"Checking that {package} is installed... ", end="")
-        if not check_package(package):
-            install_package(package)
-            printc(GREEN, f"{package} is now installed.")
-        else:
-            printc(GREEN, f"{package} is already installed.")
-
-    # Check for toml package and install if not present
-    printc(YELLOW, "Checking that toml package is installed... ", end="")
-    if not check_package('toml'):
-        install_package('toml')
-        printc(GREEN, "toml package is now installed.")
-    else:
-        printc(GREEN, "toml package is already installed.")
+    required_python_version = get_required_python_version()
+    setup_python_environment(required_python_version)
+    install_python_packages()
 
     # We can now load toml
     import toml

@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.2.0
+    * Now using `pyenv` and `.python-version` files to allow for multiple Python
+      versions to be used.
+
 ## v1.1.32
     * Using pip3 directly, not pip.
 

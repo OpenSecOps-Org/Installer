@@ -12,10 +12,8 @@ The following software must already be installed on your local computer (MacOS/L
 1. The `zsh` shell
 2. The `aws` CLI (https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 3. The AWS `sam` CLI (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
-4. Python 3.11 (https://www.python.org/downloads/release/python-3110/)
-5. Python `pip` (https://pip.pypa.io/en/stable/installation/)
-6. Python `boto3` (`pip install boto3`)
-7. Python `toml` (`pip install toml`)
+4. `pyenv` (https://github.com/pyenv/pyenv)
+5. `git`
 
 If you are installing Delegat SOAR, you should also have read the document "Delegat SOAR - 
 Installation Prerequisites" and followed its suggestions as to how to tag your system's
@@ -41,6 +39,7 @@ Setting up your Delegat AB client workspace
 
 Checking that aws is installed... OK
 Checking that sam is installed... OK
+Checking that pyenv is installed... OK
 Checking that python3 is installed... OK
 Checking that pip is installed... OK
 Checking that boto3 is installed... boto3 is already installed.
