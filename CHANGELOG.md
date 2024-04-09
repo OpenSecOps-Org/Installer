@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.2.1
+
+    * Added yq to the list of pip packages to install.
+
 ## v1.2.0
     * Now using `pyenv` and `.python-version` files to allow for multiple Python
       versions to be used.

@@ -53,7 +53,7 @@ def install_package(package):
 
 def install_python_packages():
     # Check for necessary Python packages
-    necessary_packages = ['boto3', 'toml']
+    necessary_packages = ['boto3', 'toml', 'yq']
     for package in necessary_packages:
         printc(YELLOW, f"Checking that {package} is installed... ", end="")
         if not check_package(package):
