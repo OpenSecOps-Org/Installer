@@ -40,11 +40,11 @@ Setting up your Delegat AB client workspace
 Checking that aws is installed... OK
 Checking that sam is installed... OK
 Checking that pyenv is installed... OK
-Checking that python3 is installed... OK
-Checking that pip is installed... OK
-Checking that boto3 is installed... boto3 is already installed.
-Checking that toml package is installed... toml package is already installed.
-Checking that yq package is installed... yq package is already installed.
+Checking that git is installed... OK
+Cheching that Python 3.12.2 is installed... Installing Python 3.12.2... OK
+Checking that boto3 is installed... boto3 is now installed.
+Checking that toml package is installed... toml package is now installed.
+Checking that yq package is installed... yq package is now installed.
 Downloading repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
 Downloading repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
 Downloading repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK
@@ -62,8 +62,9 @@ Setting up your Delegat AB client workspace
 
 Checking that aws is installed... OK
 Checking that sam is installed... OK
-Checking that python3 is installed... OK
-Checking that pip is installed... OK
+Checking that pyenv is installed... OK
+Checking that git is installed... OK
+Cheching that Python 3.12.2 is installed... OK
 Checking that boto3 is installed... boto3 is already installed.
 Checking that toml package is installed... toml package is already installed.
 Checking that yq package is installed... yq package is already installed.
@@ -83,10 +84,12 @@ Only Delegat SOAR is installed, assuming 'SOAR' is what you want.
 
 Checking that aws is installed... OK
 Checking that sam is installed... OK
-Checking that python3 is installed... OK
-Checking that pip is installed... OK
+Checking that pyenv is installed... OK
+Checking that git is installed... OK
+Cheching that Python 3.12.2 is installed... OK
 Checking that boto3 is installed... boto3 is already installed.
 Checking that toml package is installed... toml package is already installed.
+Checking that yq package is installed... yq package is already installed.
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK

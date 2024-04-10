@@ -1,7 +1,9 @@
 # Change Log
 
-## v1.2.1
+## v1.2.2
+    * Printing information about Python versions in `init`.
 
+## v1.2.1
     * Added yq to the list of pip packages to install.
 
 ## v1.2.0

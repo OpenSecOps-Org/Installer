@@ -31,10 +31,13 @@ def get_required_python_version():
 
 
 def setup_python_environment(required_version):
+    printc(YELLOW, f"Checking that Python {required_version} is installed... ", end="")
     installed_versions = subprocess.check_output(['pyenv', 'versions', '--bare'], encoding='utf-8').splitlines()
     if required_version not in installed_versions:
         printc(YELLOW, f"Installing Python {required_version}... ", end="")
         subprocess.check_call(['pyenv', 'install', required_version])
+        printc(GREEN, "OK")
+    else:
         printc(GREEN, "OK")
     subprocess.check_call(['pyenv', 'local', required_version])
 
