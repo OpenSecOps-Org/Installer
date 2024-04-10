@@ -63,7 +63,7 @@ def install_python_packages():
             install_package(package)
             printc(GREEN, f"{package} is now installed.")
         else:
-            printc(GREEN, f"{package} is already installed.")
+            printc(GREEN, "OK")
 
 
 def clone_repo(url, path):

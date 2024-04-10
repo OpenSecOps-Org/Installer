@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.2.3
+    * Changed `init` message wording slightly for compactness.
+
 ## v1.2.2
     * Printing information about Python versions in `init`.
 

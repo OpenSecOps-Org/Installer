@@ -65,9 +65,9 @@ Checking that sam is installed... OK
 Checking that pyenv is installed... OK
 Checking that git is installed... OK
 Cheching that Python 3.12.2 is installed... OK
-Checking that boto3 is installed... boto3 is already installed.
-Checking that toml package is installed... toml package is already installed.
-Checking that yq package is installed... yq package is already installed.
+Checking that boto3 is installed... OK
+Checking that toml package is installed... OK
+Checking that yq package is installed... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK
@@ -87,9 +87,9 @@ Checking that sam is installed... OK
 Checking that pyenv is installed... OK
 Checking that git is installed... OK
 Cheching that Python 3.12.2 is installed... OK
-Checking that boto3 is installed... boto3 is already installed.
-Checking that toml package is installed... toml package is already installed.
-Checking that yq package is installed... yq package is already installed.
+Checking that boto3 is installed... OK
+Checking that toml package is installed... OK
+Checking that yq package is installed... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
 Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK
