@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 : '
 This script is used to manage and deploy applications in multiple directories.

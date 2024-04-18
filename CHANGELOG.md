@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.2.4
+    * Now using `#!/usr/bin/env zsh` for refresh.zsh.
+
 ## v1.2.3
     * Changed `init` message wording slightly for compactness.
 
