@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.2.6
+    * Rearranged GPT params.
+
 ## v1.2.5
     * Updated ChatGPT models. Omni default.
 
