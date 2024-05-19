@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.2.5
+    * Updated ChatGPT models. Omni default.
+
 ## v1.2.4
     * Now using `#!/usr/bin/env zsh` for refresh.zsh.
 
