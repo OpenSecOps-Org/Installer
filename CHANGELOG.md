@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.3.0
+    * AI parameters updated for Bedrock integration
+
 ## v1.2.6
     * Rearranged GPT params.
 

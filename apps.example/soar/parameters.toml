@@ -150,21 +150,24 @@ IncidentExpirationInDays        = 365                         # Configure this
 
 # AI -------------------------------------------------------------------------
 
-UseChatGPT                         = "No"                        # Configure this
+AIProvider                         = "BEDROCK"                     # Configure this
 
-ChatGPTIaCSnippets                 = "Cloudformation YAML, Terraform, and Python CDK"
+AIIaCSnippets                      = "Cloudformation YAML, Terraform, and Python CDK" # Configure this
 
-ChatGPTAnonymizeAccountNumbers     = "Yes"
-ChatGPTAnonymizeHexStrings         = "Yes"
-ChatGPTRemoveARNs                  = "No"
-ChatGPTRemoveEmailAddresses        = "Yes"
+AIAnonymizeAccountNumbers          = "No"
+AIAnonymizeHexStrings              = "No"
+AIRemoveARNs                       = "No"
+AIRemoveEmailAddresses             = "No"
 
-WeeklyReport                       = "No"                        # Configure this
-WeeklyReportEmailRecipients        = "someone@example.com"       # Configure this
-WeeklyReportIndividualAccounts     = "Yes"                       # Configure this
+WeeklyReport                       = "Yes"                         # Configure this
+WeeklyReportEmailRecipients        = "someone@example.com"         # Configure this
+WeeklyReportIndividualAccounts     = "Yes"                         # Configure this
 
 WeeklyReportTitle                  = "Delegat SOAR Weekly Security Report"
-WeeklyReportWeekNumbers            = "ISO"                       # 'ISO' or 'No'
+WeeklyReportWeekNumbers            = "ISO"                         # 'ISO' or 'No'
+
+BedrockRegion                      = "us-east-1"
+BedrockModel                       = "anthropic.claude-3-5-sonnet-20240620-v1:0"
 
 ChatGPTOrganizationIdParameterPath = "/soar/chatgpt/organization-id"
 ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key" 
@@ -172,8 +175,6 @@ ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key"
 ChatGPTDefaultModel                = "gpt-4o" 
 ChatGPTFallbackModel               = "gpt-4-turbo"
 
-WeeklyReportChatGPTDefaultModel    = "gpt-4o" 
-WeeklyReportChatGPTFallbackModel   = "gpt-4-turbo" 
 
 # Dashboard -------------------------------------------------------------------
 
