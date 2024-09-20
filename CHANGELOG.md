@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.4.0
+    * Rearranged repo installation order.
+
 ## v1.3.0
     * AI parameters updated for Bedrock integration
 

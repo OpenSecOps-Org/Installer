@@ -25,7 +25,7 @@ scps:
   - name: require-boundary-permissions
     description: |
       Requires builder principals to use an appropriate boundary policy for creating IAM Roles.
-      Protects boundary permissions from tampering.
+      Protects boundary permissions from being tampered with.
     resource_file: require-boundary-permissions.json
     deployment_targets:
       organizational_units:

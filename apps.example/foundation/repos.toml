@@ -2,6 +2,18 @@
 delegat_base_url = "https://github.com/Delegat-AB/"
 
 [[repos]]
+name = "Foundation-permission-boundary-policies"
+
+[[repos]]
+name = "Foundation-service-control-policies"
+
+[[repos]]
+name = "Foundation-AWS-Core-SSO-Configuration"
+open_source = true
+credits     = "Peter Bengtson's open-source utility to set up AWS SSO core configuration."
+url         = "https://github.com/Delegat-AB/Foundation-AWS-Core-SSO-Configuration"
+
+[[repos]]
 name = "Foundation-new-account-created-sns-topic"
 
 [[repos]]
@@ -23,15 +35,6 @@ name = "Foundation-infra-immutable-tagger"
 name = "Foundation-instance-port-report"
 
 [[repos]]
-name = "Foundation-permission-boundary-policies"
-
-[[repos]]
-name = "Foundation-AWS-Core-SSO-Configuration"
-open_source = true
-credits     = "Peter Bengtson's open-source utility to set up AWS SSO core configuration."
-url         = "https://github.com/PeterBengtson/Foundation-AWS-Core-SSO-Configuration"
-
-[[repos]]
 name = "Foundation-CloudWatch2S3"
 open_source = true
 credits     = "CloudSnorkel's logging infrastructure for exporting all CloudWatch logs from multiple accounts to a single S3 bucket."
@@ -42,7 +45,4 @@ name = "Foundation-control-tower-log-aggregator"
 open_source = true
 credits     = "Peter Bengtson's serverless log processing application with aggregation and Glacier long-term storage."
 url         = "https://github.com/PeterBengtson/control-tower-log-aggregator"
-
-[[repos]]
-name = "Foundation-service-control-policies"
 
