@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.4.2
+    * Updated account profile names and comment.
+
 ## v1.4.1
     * Updated the parameter section order to match the new repo order.
 
