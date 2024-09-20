@@ -27,6 +27,48 @@ sso-group-prefix            = "acme-inc-"
 
 # --------------------------------------------------------------
 #
+# Foundation-permission-boundary-policies
+#
+# --------------------------------------------------------------
+
+[Foundation-permission-boundary-policies.INFRA-security-administrator-permission-boundary-policy]
+[Foundation-permission-boundary-policies.INFRA-network-administrator-permission-boundary-policy]
+[Foundation-permission-boundary-policies.INFRA-developer-permission-boundary-policy]
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-service-control-policies
+#
+# --------------------------------------------------------------
+
+[Foundation-service-control-policies.sync-scps]
+
+
+
+# --------------------------------------------------------------
+#
+# Foundation-AWS-Core-SSO-Configuration
+#
+# --------------------------------------------------------------
+
+[Foundation-AWS-Core-SSO-Configuration.sync-groups]
+
+group-prefix = '{sso-group-prefix}'
+
+
+[Foundation-AWS-Core-SSO-Configuration.sync-permission-sets]
+
+
+[Foundation-AWS-Core-SSO-Configuration.sync-accounts]
+
+group-prefix = '{sso-group-prefix}'
+
+
+
+# --------------------------------------------------------------
+#
 # Foundation-new-account-created-sns-topic
 #
 # --------------------------------------------------------------
@@ -127,38 +169,6 @@ OrgAccountId     = '{admin-account}'
 
 # --------------------------------------------------------------
 #
-# Foundation-permission-boundary-policies
-#
-# --------------------------------------------------------------
-
-[Foundation-permission-boundary-policies.INFRA-security-administrator-permission-boundary-policy]
-[Foundation-permission-boundary-policies.INFRA-network-administrator-permission-boundary-policy]
-[Foundation-permission-boundary-policies.INFRA-developer-permission-boundary-policy]
-
-
-
-# --------------------------------------------------------------
-#
-# Foundation-AWS-Core-SSO-Configuration
-#
-# --------------------------------------------------------------
-
-[Foundation-AWS-Core-SSO-Configuration.sync-groups]
-
-group-prefix = '{sso-group-prefix}'
-
-
-[Foundation-AWS-Core-SSO-Configuration.sync-permission-sets]
-
-
-[Foundation-AWS-Core-SSO-Configuration.sync-accounts]
-
-group-prefix = '{sso-group-prefix}'
-
-
-
-# --------------------------------------------------------------
-#
 # Foundation-CloudWatch2S3
 #
 # --------------------------------------------------------------
@@ -207,14 +217,3 @@ ExpirationInDays                  = 3650
 DaysUntilGlacierDeepArchive       = 90
 GlacierObjectSize                 = 204800
 AggregationRegions                = '{all-regions}'
-
-
-
-# --------------------------------------------------------------
-#
-# Foundation-service-control-policies
-#
-# --------------------------------------------------------------
-
-[Foundation-service-control-policies.sync-scps]
-
