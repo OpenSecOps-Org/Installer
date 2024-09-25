@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.4.3
+    * Added section to the README about updates and recovery.
+
 ## v1.4.2
     * Updated account profile names and comment.
 

@@ -163,3 +163,29 @@ You can also deploy a repo individually by doing a `cd` into it followed by:
 This is equivalent to what the installer does during deployments. The above command takes the same switches 
 as `deploy-all`, that is, `--dry-run` and `--verbose`.  For all available options, try `./deploy --help`.
 
+
+## Update & Recovery
+
+Essentially, all you need to do is go to your `Delegat-Install` folder in a terminal and then:
+
+```
+git pull
+./deploy-all --dry-run
+./deploy-all
+```
+
+You'll need to specify `Foundation` or `SOAR` as a parameter to `deploy-all` if you have more than one product installed.
+
+If you want to update a single component, go to its repo directory and do:
+
+```
+./deploy --dry-run
+./deploy
+```
+
+It’s generally prudent to do a dry run first to see what is going to change, but the dry run is of course completely optional.
+
+NB: You can always delete all repositories, including the `Delegat-Install` one, provided you keep `Delegat-Install/apps` where all your configuration lives. There is no configuration in the individual repositories. 
+
+If you delete the component repo directories, all you need to do is `./init` and fresh copies will be downloaded from Delegat’s central repositories.
+
