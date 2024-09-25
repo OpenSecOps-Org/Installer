@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.4.4
+    * Added security admin access to core accounts.
+
 ## v1.4.3
     * Added section to the README about updates and recovery.
 

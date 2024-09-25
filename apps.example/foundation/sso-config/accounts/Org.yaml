@@ -5,8 +5,13 @@ sso_groups:
     - AWSAdministratorAccess
     - ReadOnlyWideAccess
 
+  security-administration:
+    - SecurityAdministratorAccess
+    - ReadOnlyWideAccess
+
   account-administration:
     - AWSServiceCatalogAdminFullAccess
+
   cost-management:
     - BillingAccess
 

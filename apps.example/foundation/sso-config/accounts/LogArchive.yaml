@@ -4,6 +4,11 @@ sso_groups:
   cloud-administration:
     - AWSAdministratorAccess
     - ReadOnlyWideAccess
+
+  security-administration:
+    - SecurityAdministratorAccess
+    - ReadOnlyWideAccess
+
   auditors:
     - ReadOnlyWideAccess
 
