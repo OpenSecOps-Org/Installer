@@ -11,6 +11,7 @@ permissions_boundary: null
 
 aws_managed_policies:
   - Billing
+  - AmazonQDeveloperAccess
 
 inline_policy: null
 

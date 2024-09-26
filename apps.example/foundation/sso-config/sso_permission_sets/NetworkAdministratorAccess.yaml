@@ -19,6 +19,7 @@ aws_managed_policies:
   - ViewOnlyAccess
   - ReadOnlyAccess
   - AWSSecurityHubReadOnlyAccess
+  - AmazonQDeveloperAccess
 
 inline_policy:
     Version: '2012-10-17'

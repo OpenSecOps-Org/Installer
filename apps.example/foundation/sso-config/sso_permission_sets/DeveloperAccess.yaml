@@ -17,6 +17,7 @@ permissions_boundary: null
 aws_managed_policies:
     - ViewOnlyAccess
     - ReadOnlyAccess
+    - AmazonQDeveloperAccess
 
 inline_policy:
     Version: "2012-10-17"

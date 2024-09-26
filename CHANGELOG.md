@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.4.5
+    * Added AmazonQDeveloperAccess to all applicable SSO permission sets.
+
 ## v1.4.4
     * Added security admin access to core accounts.
 
