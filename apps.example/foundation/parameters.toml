@@ -76,7 +76,7 @@ group-prefix = '{sso-group-prefix}'
 [Foundation-new-account-created-sns-topic.INFRA-new-account-created-sns-topic]
 
 CrossAccountRole = '{cross-account-role}'
-
+OrgAccountId     = '{admin-account}'
 
 
 # --------------------------------------------------------------

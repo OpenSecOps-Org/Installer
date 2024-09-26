@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.4.6
+    * Added the Org account ID as a parameter to Foundation-new-account-created-sns-topic.
+
 ## v1.4.5
     * Added AmazonQDeveloperAccess to all applicable SSO permission sets.
 
