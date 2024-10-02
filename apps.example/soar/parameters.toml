@@ -279,7 +279,9 @@ PrincipalOrgID              = '{org-id}'
 [SOAR-detect-stack-drift.SAM]
 
 IncidentSeverity = 'LOW'
-SkipTheseStacks  = 'INFRA-SOAR, AWSControlTowerSecurityResources, AWSControlTowerBP-SECURITY-TOPICS, AWSControlTowerExecutionRole'
+SkipTheseStacks  = 'AWSControlTowerSecurityResources, AWSControlTowerBP-SECURITY-TOPICS, AWSControlTowerExecutionRole'
+SkipPrefixes     = 'INFRA-'
+
 
 
 # --------------------------------------------------------------
