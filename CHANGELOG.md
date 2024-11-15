@@ -1,7 +1,10 @@
 # Change Log
 
+## v1.5.1
+    * Fixed typo in the CHANGELOG.
+
 ## v1.5.0
-    * Added Foundation-resource-control-policies (be sure to include its new sections in parameters.toml as per the example in apps.example/parameters.toml)
+    * Added Foundation-resource-control-policies (be sure to include its new section in parameters.toml as per the example in apps.example/parameters.toml)
 
 ## v1.4.7
     * Added SkipPrefixes.
