@@ -8,6 +8,9 @@ name = "Foundation-permission-boundary-policies"
 name = "Foundation-service-control-policies"
 
 [[repos]]
+name = "Foundation-resource-control-policies"
+
+[[repos]]
 name = "Foundation-AWS-Core-SSO-Configuration"
 open_source = true
 credits     = "Peter Bengtson's open-source utility to set up AWS SSO core configuration."

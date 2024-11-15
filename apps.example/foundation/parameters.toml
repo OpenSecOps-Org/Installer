@@ -49,6 +49,18 @@ sso-group-prefix            = "acme-inc-"
 
 # --------------------------------------------------------------
 #
+# Foundation-resource-control-policies
+#
+# --------------------------------------------------------------
+
+[Foundation-resource-control-policies.sync-rcps]
+
+substitutions = '<<ORG-ID>>:{org-id},<<ROOT-OU>>:{root-ou}'
+
+
+
+# --------------------------------------------------------------
+#
 # Foundation-AWS-Core-SSO-Configuration
 #
 # --------------------------------------------------------------

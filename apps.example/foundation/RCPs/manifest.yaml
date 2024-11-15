@@ -1,0 +1,11 @@
+---
+rcps:
+
+  - name: enforce-org-identities
+    description: |
+      Restricts access to S3 buckets so that only principals within the organization can access them.
+    resource_file: enforce-org-identities.json
+    deployment_targets:
+      organizational_units:
+        - Root
+
