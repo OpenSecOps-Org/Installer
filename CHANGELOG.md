@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.6.0
+    * More compact and informative ./init output.
+
 ## v1.5.1
     * Fixed typo in the CHANGELOG.
 

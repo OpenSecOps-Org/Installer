@@ -31,14 +31,10 @@ def get_required_python_version():
 
 
 def setup_python_environment(required_version):
-    printc(YELLOW, f"Checking that Python {required_version} is installed... ", end="")
     installed_versions = subprocess.check_output(['pyenv', 'versions', '--bare'], encoding='utf-8').splitlines()
     if required_version not in installed_versions:
         printc(YELLOW, f"Installing Python {required_version}... ", end="")
         subprocess.check_call(['pyenv', 'install', required_version])
-        printc(GREEN, "OK")
-    else:
-        printc(GREEN, "OK")
     subprocess.check_call(['pyenv', 'local', required_version])
 
 
@@ -51,29 +47,35 @@ def check_package(package):
 
 
 def install_package(package):
+    printc(GREEN, f"Installing {package}... ", end="")
     subprocess.check_call([sys.executable, "-m", "pip3", "install", package])
+    printc(GREEN, "OK")
 
 
 def install_python_packages():
     # Check for necessary Python packages
     necessary_packages = ['boto3', 'toml', 'yq']
     for package in necessary_packages:
-        printc(YELLOW, f"Checking that {package} is installed... ", end="")
         if not check_package(package):
             install_package(package)
-            printc(GREEN, f"{package} is now installed.")
-        else:
-            printc(GREEN, "OK")
 
-
-def clone_repo(url, path):
+def clone_repo(url, path, name):
     if os.path.exists(path):
-        printc(YELLOW, f"\rUpdating repo {path}... ", end="")
+        printc(YELLOW, f"\rUpdating repo {name}... ", end="")
+        # Get current commit hash before pulling
+        before_pull = subprocess.run(['git', '-C', path, 'rev-parse', 'HEAD'], capture_output=True, text=True)
+        before_commit_hash = before_pull.stdout.strip()
         subprocess.run(['git', '-C', path, 'pull', '--quiet'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Get current commit hash after pulling
+        after_pull = subprocess.run(['git', '-C', path, 'rev-parse', 'HEAD'], capture_output=True, text=True)
+        after_commit_hash = after_pull.stdout.strip()
+        if before_commit_hash != after_commit_hash:
+            printc(LIGHT_BLUE, "Changes")
+        else:
+            printc(GREEN, "No changes")
     else:
         printc(YELLOW, f"\rDownloading repo {path}... ", end="")
         subprocess.run(['git', 'clone', url, path, '--quiet'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    printc(GREEN, "OK")
 
      # Dynamically obtain the current working directory before any changes
     original_dir = os.getcwd()
@@ -95,7 +97,7 @@ def clone_repo(url, path):
 
 def main():
     # Print header
-    printc(LIGHT_BLUE + BOLD, "Setting up your Delegat AB client workspace")
+    printc(LIGHT_BLUE + BOLD, "Setting up your Delegat AB client workspace...")
 
     # Get the parent directory from the CWD
     current_dir = os.getcwd()
@@ -129,12 +131,17 @@ def main():
 
     # Check for necessary software
     necessary_software = ['aws', 'sam', 'pyenv', 'git']
+    printc(YELLOW, f"Checking prerequisites ({', '.join(necessary_software)})... ", end="")
+    not_installed = []
     for software in necessary_software:
-        printc(YELLOW, f"Checking that {software} is installed... ", end="")
         if not check_software(software):
+            not_installed += software
             printc(RED, f"Please install {software} before running this script.")
-            return
+    if not_installed:
+        return
+    else:
         printc(GREEN, "OK")
+    print()
 
     required_python_version = get_required_python_version()
     setup_python_environment(required_python_version)
@@ -157,7 +164,7 @@ def main():
         repo_name = repo['name']
         repo_url = base_url + repo_name + '.git'
         repo_path = os.path.join(parent_dir, repo_name)
-        clone_repo(repo_url, repo_path)
+        clone_repo(repo_url, repo_path, repo_name)
 
 if __name__ == '__main__':
     main()
