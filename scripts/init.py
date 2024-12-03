@@ -76,6 +76,7 @@ def clone_repo(url, path, name):
     else:
         printc(YELLOW, f"\rDownloading repo {path}... ", end="")
         subprocess.run(['git', 'clone', url, path, '--quiet'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        printc(GREEN, "OK")
 
      # Dynamically obtain the current working directory before any changes
     original_dir = os.getcwd()

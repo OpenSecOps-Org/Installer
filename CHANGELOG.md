@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.6.1
+    * Added newline and OK for cloned repos.
+
 ## v1.6.0
     * More compact and informative ./init output.
 
