@@ -167,8 +167,8 @@ WeeklyReportTitle                  = "Delegat SOAR Weekly Security Report"
 WeeklyReportWeekNumbers            = "ISO"                         # 'ISO' or 'No'
 
 BedrockRegion                      = "us-east-1"
-BedrockModel                       = "anthropic.claude-3-5-sonnet-20240620-v1:0"
-
+BedrockModel                       = "anthropic.claude-3-5-sonnet-20241022-v2:0"  # https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
+ 
 ChatGPTOrganizationIdParameterPath = "/soar/chatgpt/organization-id"
 ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key" 
 
