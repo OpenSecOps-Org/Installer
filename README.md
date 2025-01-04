@@ -68,9 +68,9 @@ Cheching that Python 3.12.2 is installed... OK
 Checking that boto3 is installed... OK
 Checking that toml package is installed... OK
 Checking that yq package is installed... OK
-Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
-Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
-Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK
+Updating repo SOAR-sec-hub-configuration... OK
+Updating repo SOAR-detect-log-buckets... Changes
+Updating repo SOAR... OK
 ```
 
 If you only have one application installed, you can leave out the app name:
@@ -90,9 +90,9 @@ Cheching that Python 3.12.2 is installed... OK
 Checking that boto3 is installed... OK
 Checking that toml package is installed... OK
 Checking that yq package is installed... OK
-Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
-Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
-Updating repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK
+Updating repo SOAR-sec-hub-configuration... OK
+Updating repo SOAR-detect-log-buckets... OK
+Updating repo SOAR... OK
 ```
 
 
@@ -120,6 +120,10 @@ Edit `parameters.toml` to your liking. All parameters are documented in the Dele
 
 ### apps/foundation/SCPs
 This folder contains the Service Control Policies for Delegat Foundation. Over time, you will want to
+tailor them to your specific requirements.
+
+### apps/foundation/RCPs
+This folder contains the Resource Control Policies for Delegat Foundation. Over time, you will want to
 tailor them to your specific requirements.
 
 ### apps/soar/parameters.toml   

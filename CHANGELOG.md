@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.7.0
+    * Updated the README.
+
 ## v1.6.2
     * Updated the standard GenAI model to Claude 3.5 Sonnet v2.
 
