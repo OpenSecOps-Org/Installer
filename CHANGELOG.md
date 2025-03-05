@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.7.1
+    * Example config now uses Claude 3.7 with a US inference profile.
+
 ## v1.7.0
     * Updated the README.
 
