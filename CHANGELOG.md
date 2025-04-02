@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.7.3
+    * Update to the deploy script: formatting stackset updates improved.
+
 ## v1.7.2
     * Now using "pip" rather than "pip3".
 
