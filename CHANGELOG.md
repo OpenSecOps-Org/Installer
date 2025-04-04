@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.7.4
+    * Made emptying the Control Tower S3 access every hour the default.
+
 ## v1.7.3
     * Update to the deploy script: formatting stackset updates improved.
 
