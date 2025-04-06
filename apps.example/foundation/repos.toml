@@ -1,5 +1,5 @@
 [GitHub]
-delegat_base_url = "https://github.com/CloudSecOps-Org/"
+source_base_url = "https://github.com/CloudSecOps-Org/"
 
 [[repos]]
 name = "Foundation-permission-boundary-policies"

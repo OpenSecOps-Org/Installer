@@ -160,7 +160,7 @@ def main():
     config = toml.load(config_file)
 
     # Clone necessary repos
-    base_url = config['GitHub']['delegat_base_url']
+    base_url = config['GitHub']['source_base_url']
     for repo in config['repos']:
         repo_name = repo['name']
         repo_url = base_url + repo_name + '.git'

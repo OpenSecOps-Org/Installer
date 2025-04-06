@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.8.2
+    * File paths corrected for the name name of the installer.
+
 ## v1.8.1
     * The license is now MPL 2.0, Mozilla Public License v2.0.
 
