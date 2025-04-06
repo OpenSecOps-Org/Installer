@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.7.6
+    * Testing dual deployment.
+
 ## v1.7.5
     * Added dual remote push capability to CloudSecOps-Org repositories.
 
