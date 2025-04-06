@@ -1,5 +1,5 @@
 [GitHub]
-delegat_base_url = "https://github.com/Delegat-AB/"
+delegat_base_url = "https://github.com/CloudSecOps-Org/"
 
 [[repos]]
 name = "Foundation-permission-boundary-policies"
@@ -14,7 +14,7 @@ name = "Foundation-resource-control-policies"
 name = "Foundation-AWS-Core-SSO-Configuration"
 open_source = true
 credits     = "Peter Bengtson's open-source utility to set up AWS SSO core configuration."
-url         = "https://github.com/Delegat-AB/Foundation-AWS-Core-SSO-Configuration"
+url         = "https://github.com/CloudSecOps-Org/Foundation-AWS-Core-SSO-Configuration"
 
 [[repos]]
 name = "Foundation-new-account-created-sns-topic"

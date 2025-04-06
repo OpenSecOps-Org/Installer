@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.8.0
+    * Started the process of renaming "Delegat" to "CloudSecOps".
+
 ## v1.7.6
     * Testing dual deployment.
 

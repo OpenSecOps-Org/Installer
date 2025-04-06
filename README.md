@@ -1,6 +1,6 @@
 # README
 
-This is the installer for Delegat Foundation and Delegat SOAR. It is used to prepare your
+This is the installer for CloudSecOps Foundation and CloudSecOps SOAR. It is used to prepare your
 workspace, check that you have installed all prerequisites, download all repos required, 
 and then build, install, and/or update them.
 
@@ -15,14 +15,14 @@ The following software must already be installed on your local computer (MacOS/L
 4. `pyenv` (https://github.com/pyenv/pyenv)
 5. `git`
 
-If you are installing Delegat SOAR, you should also have read the document "Delegat SOAR - 
+If you are installing CloudSecOps SOAR, you should also have read the document "CloudSecOps SOAR - 
 Installation Prerequisites" and followed its suggestions as to how to tag your system's
 accounts and configure Security Hub to reflect your chosen security posture.
 
 
 ## Initialisation
-First create a folder on your laptop to contain all Delegat AB repos. You can call it anything.
-We call it DELEGAT-CLIENT-FOLDER. Clone this repository into the new folder.
+First create a folder on your laptop to contain all CloudSecOps repos. You can call it anything.
+We call it CLOUDSECOPS-CLIENT-FOLDER. Clone this repository into the new folder.
 
 Next `cd` into this repo and type:
 ```console
@@ -35,7 +35,7 @@ or
 
 The script will print something like this:
 ```console
-Setting up your Delegat AB client workspace
+Setting up your CloudSecOps client workspace
 
 Checking that aws is installed... OK
 Checking that sam is installed... OK
@@ -45,9 +45,9 @@ Cheching that Python 3.12.2 is installed... Installing Python 3.12.2... OK
 Checking that boto3 is installed... boto3 is now installed.
 Checking that toml package is installed... toml package is now installed.
 Checking that yq package is installed... yq package is now installed.
-Downloading repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
-Downloading repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
-Downloading repo /Users/john_doe/Documents/Projects/AWS/DELEGAT-CLIENT-FOLDER/SOAR... OK
+Downloading repo /Users/john_doe/Documents/Projects/AWS/CLOUDSECOPS-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
+Downloading repo /Users/john_doe/Documents/Projects/AWS/CLOUDSECOPS-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
+Downloading repo /Users/john_doe/Documents/Projects/AWS/CLOUDSECOPS-CLIENT-FOLDER/SOAR... OK
 ...(etc)
 ```
 
@@ -58,7 +58,7 @@ The operation is idempotent, which means you can repeat it to update all repos, 
 
 and get
 ```console
-Setting up your Delegat AB client workspace
+Setting up your CloudSecOps client workspace
 
 Checking that aws is installed... OK
 Checking that sam is installed... OK
@@ -79,8 +79,8 @@ If you only have one application installed, you can leave out the app name:
 ```
 This will print:
 ```console
-Setting up your Delegat AB client workspace
-Only Delegat SOAR is installed, assuming 'SOAR' is what you want.
+Setting up your CloudSecOps client workspace
+Only CloudSecOps SOAR is installed, assuming 'SOAR' is what you want.
 
 Checking that aws is installed... OK
 Checking that sam is installed... OK
@@ -116,18 +116,18 @@ them with your AWS accounts. You probably don't need to modify the contents of t
 least not initially.
 
 ### apps/foundation/parameters.toml
-Edit `parameters.toml` to your liking. All parameters are documented in the Delegat Foundation SOP.
+Edit `parameters.toml` to your liking. All parameters are documented in the CloudSecOps Foundation SOP.
 
 ### apps/foundation/SCPs
-This folder contains the Service Control Policies for Delegat Foundation. Over time, you will want to
+This folder contains the Service Control Policies for CloudSecOps Foundation. Over time, you will want to
 tailor them to your specific requirements.
 
 ### apps/foundation/RCPs
-This folder contains the Resource Control Policies for Delegat Foundation. Over time, you will want to
+This folder contains the Resource Control Policies for CloudSecOps Foundation. Over time, you will want to
 tailor them to your specific requirements.
 
 ### apps/soar/parameters.toml   
-Edit `parameters.toml` to your liking. All parameters are documented in the Delegat SOAR SOP.
+Edit `parameters.toml` to your liking. All parameters are documented in the CloudSecOps SOAR SOP.
 
 ### Repo suppression
 If you don't want to deploy a certain repo, make a copy of the appropriate `repos.toml` and call it
@@ -170,7 +170,7 @@ as `deploy-all`, that is, `--dry-run` and `--verbose`.  For all available option
 
 ## Update & Recovery
 
-Essentially, all you need to do is go to your `Delegat-Install` folder in a terminal and then:
+Essentially, all you need to do is go to your `CloudSecOps-Installer` folder in a terminal and then:
 
 ```
 git pull
@@ -189,7 +189,7 @@ If you want to update a single component, go to its repo directory and do:
 
 It’s generally prudent to do a dry run first to see what is going to change, but the dry run is of course completely optional.
 
-NB: You can always delete all repositories, including the `Delegat-Install` one, provided you keep `Delegat-Install/apps` where all your configuration lives. There is no configuration in the individual repositories. 
+NB: You can always delete all repositories, including the `CloudSecOps-Installer` one, provided you keep `CloudSecOps-Installer/apps` where all your configuration lives. There is no configuration in the individual repositories. 
 
-If you delete the component repo directories, all you need to do is `./init` and fresh copies will be downloaded from Delegat’s central repositories.
+If you delete the component repo directories, all you need to do is `./init` and fresh copies will be downloaded from CloudSecOps’s central repositories.
 

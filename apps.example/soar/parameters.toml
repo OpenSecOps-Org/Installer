@@ -163,7 +163,7 @@ WeeklyReport                       = "Yes"                         # Configure t
 WeeklyReportEmailRecipients        = "someone@example.com"         # Configure this
 WeeklyReportIndividualAccounts     = "Yes"                         # Configure this
 
-WeeklyReportTitle                  = "Delegat SOAR Weekly Security Report"
+WeeklyReportTitle                  = "CloudSecOps SOAR Weekly Security Report"
 WeeklyReportWeekNumbers            = "ISO"                         # 'ISO' or 'No'
 
 BedrockRegion                      = "us-east-1"
@@ -178,8 +178,8 @@ ChatGPTFallbackModel               = "gpt-4-turbo"
 
 # Dashboard -------------------------------------------------------------------
 
-DashboardName     = 'Delegat_SOAR_Security_Status'       # Use 'CloudWatch-Default' to make it the default dashboard
-DashboardNameExec = 'Delegat_SOAR_Execution_Dashboard'   # Use 'CloudWatch-Default' to make it the default dashboard
+DashboardName     = 'CloudSecOps_SOAR_Security_Status'       # Use 'CloudWatch-Default' to make it the default dashboard
+DashboardNameExec = 'CloudSecOps_SOAR_Execution_Dashboard'   # Use 'CloudWatch-Default' to make it the default dashboard
 
 # Environment names -----------------------------------------------------------
 
@@ -319,7 +319,7 @@ InstanceTypeList = 'm5.large,t3.large'
 [SOAR-SAM-Automating-Forensic-Disk-Collection.SAM]
 
 ORGID                              = '{org-id}'
-ArtifactBucketName                 = 'delegat-soar-forensic-artifacts'
+ArtifactBucketName                 = 'cloudsecops-soar-forensic-artifacts'
 ArtifactBucketExpirationInDays     = 3650
 ForensicsAMIs                      = "us-east-1: ami-000000000000, eu-west-1: ami-1111111111111"  # update this
 AllowInvokeFromAccountId           = '{admin-account}'

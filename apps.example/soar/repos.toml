@@ -1,5 +1,5 @@
 [GitHub]
-delegat_base_url = "https://github.com/Delegat-AB/"
+delegat_base_url = "https://github.com/CloudSecOps-Org/"
 
 [[repos]]
 name = "SOAR-sec-hub-role"

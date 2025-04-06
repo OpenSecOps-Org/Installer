@@ -118,7 +118,7 @@ def main():
         return
 
     # Print header
-    printc(LIGHT_BLUE + BOLD, "Deploying your Delegat AB application...")
+    printc(LIGHT_BLUE + BOLD, "Deploying your CloudSecOps application...")
 
     # Get the parent directory from the CWD
     current_dir = os.getcwd()
@@ -134,17 +134,17 @@ def main():
         installed_foundation_repos = [d for d in installed_dirs if d.startswith('Foundation')]
 
         if installed_soar_repos and installed_foundation_repos:
-            printc(RED, "Both Delegat SOAR and Delegat Foundation repos are installed.")
+            printc(RED, "Both CloudSecOps SOAR and CloudSecOps Foundation repos are installed.")
             printc(RED, "Please specify 'SOAR' or 'Foundation' as an argument.")
             return
         elif installed_soar_repos:
             app = 'soar'
-            printc(LIGHT_BLUE, "Only Delegat SOAR is installed, assuming 'SOAR' is what you want.")
+            printc(LIGHT_BLUE, "Only CloudSecOps SOAR is installed, assuming 'SOAR' is what you want.")
         elif installed_foundation_repos:
             app = 'foundation'
-            printc(LIGHT_BLUE, "Only Delegat Foundation is installed, assuming 'Foundation' is what you want.")
+            printc(LIGHT_BLUE, "Only CloudSecOps Foundation is installed, assuming 'Foundation' is what you want.")
         else:
-            printc(RED, "No Delegat SOAR or Delegat Foundation repos are installed.")
+            printc(RED, "No CloudSecOps SOAR or CloudSecOps Foundation repos are installed.")
             printc(RED, "Please specify 'SOAR' or 'Foundation' as an argument.")
             return
 
