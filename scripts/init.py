@@ -48,7 +48,7 @@ def check_package(package):
 
 def install_package(package):
     printc(GREEN, f"Installing {package}... ", end="")
-    subprocess.check_call([sys.executable, "-m", "pip3", "install", package])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
     printc(GREEN, "OK")
 
 

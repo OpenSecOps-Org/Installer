@@ -1,5 +1,17 @@
 # Change Log
 
+## v1.7.5
+    * Added dual remote push capability to CloudSecOps-Org repositories.
+
+## v1.7.4
+    * Made emptying the Control Tower S3 access every hour the default.
+
+## v1.7.3
+    * Update to the deploy script: formatting stackset updates improved.
+
+## v1.7.2
+    * Now using "pip" rather than "pip3".
+
 ## v1.7.1
     * Example config now uses Claude 3.7 with a US inference profile.
 
