@@ -15,9 +15,12 @@ The following software must already be installed on your local computer (MacOS/L
 4. `pyenv` (https://github.com/pyenv/pyenv)
 5. `git`
 
-If you are installing OpenSecOps SOAR, you should also have read the document "OpenSecOps SOAR - 
-Installation Prerequisites" and followed its suggestions as to how to tag your system's
-accounts and configure Security Hub to reflect your chosen security posture.
+
+## Complete Installation Instructions
+
+Please check out the `docs` directory before you begin, especially:
+    * [The Foundation installation manual](docs/Foundation/OpenSecOps Foundation Installation Manual.docx.pdf)
+    * [The SOAR installation manual](docs/SOAR/OpenSecOps SOAR - Installation Manual.docx.pdf)
 
 
 ## Initialisation

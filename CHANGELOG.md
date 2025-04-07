@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.2
+    * Updated the README with the installation manual paths.
+
 ## v1.9.1
     * Repo URLs corrected.
 
