@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.4
+    * List corrected.
+
 ## v1.9.3
     * Spaces encoded correctly in doc file names.
 

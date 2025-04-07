@@ -19,8 +19,8 @@ The following software must already be installed on your local computer (MacOS/L
 ## Complete Installation Instructions
 
 Please check out the `docs` directory before you begin, especially:
-    * [The Foundation installation manual](docs/Foundation/OpenSecOps%20Foundation%20Installation%20Manual.docx.pdf)
-    * [The SOAR installation manual](docs/SOAR/OpenSecOps%20SOAR%20-%20Installation%20Manual.docx.pdf)
+* [The Foundation installation manual](docs/Foundation/OpenSecOps%20Foundation%20Installation%20Manual.docx.pdf)
+* [The SOAR installation manual](docs/SOAR/OpenSecOps%20SOAR%20-%20Installation%20Manual.docx.pdf)
 
 
 ## Initialisation
