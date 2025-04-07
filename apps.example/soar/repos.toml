@@ -1,5 +1,5 @@
 [GitHub]
-source_base_url = "https://github.com/CloudSecOps-Org/"
+source_base_url = "https://github.com/OpenSecOps-Org/"
 
 [[repos]]
 name = "SOAR-sec-hub-role"
