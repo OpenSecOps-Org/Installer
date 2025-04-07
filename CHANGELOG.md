@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.0
+    * Added docs folder with all manuals for Foundation and SOAR.
+
 ## v1.8.3
     * Updated GitHub organization name from CloudSecOps-Org to OpenSecOps-Org.
     * All references to CloudSecOps updated to OpenSecOps.
