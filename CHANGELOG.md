@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.3
+    * Spaces encoded correctly in doc file names.
+
 ## v1.9.2
     * Updated the README with the installation manual paths.
 
