@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.1
+    * Repo URLs corrected.
+
 ## v1.9.0
     * Added docs folder with all manuals for Foundation and SOAR.
 
