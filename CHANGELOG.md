@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.6
+    * Updated apps.example with ProductName explicitly given for the SOAR.
+
 ## v1.9.5
     * Removed "AB".
 

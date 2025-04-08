@@ -42,6 +42,8 @@ soar-s3-request-publicly-writable = 'soar:s3:request-publicly-writable'
 
 [SOAR.SAM]
 
+ProductName            = 'OpenSecOps SOAR'
+
 SOAREnabled            = 'Yes'                                     # Configure this
 DeferIncidents         = "No"                                      # Configure this
 DeferAutoRemediations  = "No"                                      # Configure this
