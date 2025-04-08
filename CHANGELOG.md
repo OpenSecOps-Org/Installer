@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.0.0
+    * OpenSecOps-Org is now the only publishing target GitHub organisation.
+
 ## v1.9.7
     * Updated the scripts README.
 
