@@ -98,7 +98,7 @@ def clone_repo(url, path, name):
 
 def main():
     # Print header
-    printc(LIGHT_BLUE + BOLD, "Setting up your OpenSecOps AB client workspace...")
+    printc(LIGHT_BLUE + BOLD, "Setting up your OpenSecOps client workspace...")
 
     # Get the parent directory from the CWD
     current_dir = os.getcwd()

@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.9.5
+    * Removed "AB".
+
 ## v1.9.4
     * List corrected.
 
