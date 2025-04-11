@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.0.2
+    * Fixed documentation links to use OpenSecOps-Org instead of CloudSecOps-Org.
+
 ## v2.0.1
     * Moved documentation to dedicated Documentation repository and updated references.
 
