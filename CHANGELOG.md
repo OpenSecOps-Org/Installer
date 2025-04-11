@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.0.1
+    * Moved documentation to dedicated Documentation repository and updated references.
+
 ## v2.0.0
     * OpenSecOps-Org is now the only publishing target GitHub organisation.
 
