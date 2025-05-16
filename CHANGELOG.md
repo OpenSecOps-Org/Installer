@@ -1,5 +1,9 @@
 # Change Log
 
+## v2.0.3
+    * Corrected indentation in the SecurityAdministratorAccess.yaml file
+    * Changes to the README
+
 ## v2.0.2
     * Fixed documentation links to use OpenSecOps-Org instead of CloudSecOps-Org.
 

@@ -25,9 +25,14 @@ Please check out the Documentation repository before you begin, especially:
 
 ## Initialisation
 First create a folder on your laptop to contain all OpenSecOps repos. You can call it anything.
-We call it OPENSECOPS-CLIENT-FOLDER. Clone this repository into the new folder.
+We call it OPENSECOPS. Clone this repository into the new folder.
 
-Next `cd` into this repo and type:
+Next `cd` into it and copy the example configuration files using the following command:
+```console
+cp -rf apps.example apps
+```
+
+You can now download the OpenSecOps repos by:
 ```console
 ./init Foundation
 ```
@@ -48,9 +53,9 @@ Cheching that Python 3.12.2 is installed... Installing Python 3.12.2... OK
 Checking that boto3 is installed... boto3 is now installed.
 Checking that toml package is installed... toml package is now installed.
 Checking that yq package is installed... yq package is now installed.
-Downloading repo /Users/john_doe/Documents/Projects/AWS/OPENSECOPS-CLIENT-FOLDER/SOAR-sec-hub-configuration... OK
-Downloading repo /Users/john_doe/Documents/Projects/AWS/OPENSECOPS-CLIENT-FOLDER/SOAR-detect-log-buckets... OK
-Downloading repo /Users/john_doe/Documents/Projects/AWS/OPENSECOPS-CLIENT-FOLDER/SOAR... OK
+Downloading repo /Users/john_doe/Documents/Projects/AWS-Governance/OPENSECOPS/SOAR-sec-hub-configuration... OK
+Downloading repo /Users/john_doe/Documents/Projects/AWS-Governance/OPENSECOPS/SOAR-detect-log-buckets... OK
+Downloading repo /Users/john_doe/Documents/Projects/AWS-Governance/OPENSECOPS/SOAR... OK
 ...(etc)
 ```
 
@@ -100,12 +105,6 @@ Updating repo SOAR... OK
 
 
 ## Configuration
-
-Copy the example configuration files using the following command:
-
-```console
-cp -rf apps.example apps
-```
 
 NB: All local configuration files are excluded from source control. Any changes to them will remain 
 on your local computer. You may want to back up them in a suitable, company-dependent location.

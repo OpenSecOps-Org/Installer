@@ -1,5 +1,5 @@
 permission_set_name: 
-SecurityAdministratorAccess
+  SecurityAdministratorAccess
 
 description:
   Provides full access to AWS services and resources. However, the rights are 
