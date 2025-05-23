@@ -169,7 +169,7 @@ WeeklyReportTitle                  = "OpenSecOps SOAR Weekly Security Report"
 WeeklyReportWeekNumbers            = "ISO"                         # 'ISO' or 'No'
 
 BedrockRegion                      = "us-east-1"
-BedrockModel                       = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"  # NB: Inference profile used ("us.")
+BedrockModel                       = "us.anthropic.claude-sonnet-4-20250514-v1:0"  # NB: Inference profile used ("us.")
  
 ChatGPTOrganizationIdParameterPath = "/soar/chatgpt/organization-id"
 ChatGPTAPIKeyParameterPath         = "/soar/chatgpt/api-key" 
