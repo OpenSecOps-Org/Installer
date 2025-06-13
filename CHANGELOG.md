@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.2.0
+    * Added the developer SSO group.
+
 ## v2.1.0
     * The default model in apps.example for Claude updated to Claude Sonnet v4.
 

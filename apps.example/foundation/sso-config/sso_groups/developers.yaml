@@ -1,0 +1,6 @@
+sso_group_name: 
+  developers
+  
+description:
+  Members of this group have DeveloperAccess, a wide and powerful role for all types of development.
+  It cannot manage IAM Users, networking or DNS, for which specialised access is required.

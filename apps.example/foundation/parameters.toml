@@ -22,7 +22,7 @@ cross-account-role          = "AWSControlTowerExecution"
 email-domain                = 'example.com'
 
 # Group prefix for SSO
-sso-group-prefix            = "acme-inc-"
+sso-group-prefix            = ""    # Include the dash: "acme-inc-"
 
 
 # --------------------------------------------------------------
