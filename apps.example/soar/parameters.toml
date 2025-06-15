@@ -62,6 +62,9 @@ DiskForensicsInvoke    = "Yes"                                     # Configure t
 MinAgeHours               = 24                                     # Configure this
 ClearAccountDataCacheRate = "6 hours"                              # Configure this
 
+ReclassifyAWSHealthIncidents = "Yes"                               # Configure this
+
+
 # Mail ----------------------------------------------------------------------------
 
 SendEmail        = "Yes"                                           # Configure this

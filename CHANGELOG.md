@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.3.0
+    * Added `ReclassifyAWSHealthIncidents` parameter to SOAR configuration to support AWS Health incident reclassification feature introduced in SOAR v2.2.0, reducing false positives.
+
 ## v2.2.0
     * Added the developer SSO group.
 
