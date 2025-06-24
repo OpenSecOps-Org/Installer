@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.4.0
+    * Added data/ML services (Athena, Batch, CloudShell, Glue, QuickSight, SageMaker) to DeveloperAccess permission sets.
+
 ## v2.3.0
     * Added `ReclassifyAWSHealthIncidents` parameter to SOAR configuration to support AWS Health incident reclassification feature introduced in SOAR v2.2.0, reducing false positives.
 

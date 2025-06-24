@@ -61,8 +61,11 @@ inline_policy:
               - apigatewayv2:*
               - application-autoscaling:*
               - appmesh:*
+              - athena:*
               - autoscaling:*
+              - batch:*
               - cloudformation:*
+              - cloudshell:*
               - cloudtrail:*
               - cloudwatch:*
               - codebuild:*
@@ -89,6 +92,7 @@ inline_policy:
               - firehose:*
               - fsx:*
               - glacier:*
+              - glue:*
               - inspector:*
               - kinesis:*
               - kms:*
@@ -98,10 +102,12 @@ inline_policy:
               - organizations:List*
               - outposts:*
               - pi:*
+              - quicksight:*
               - rds:*
               - resource-groups:*
               - s3-object-lambda:*
               - s3:*
+              - sagemaker:*
               - secretsmanager:*
               - securityhub:*
               - servicediscovery:*
