@@ -1,5 +1,11 @@
 # Change Log
 
+## v2.5.1
+    * Fixed script execution to properly pass --verbose flag to component scripts when using verbose mode.
+
+## v2.5.0
+    * Added Foundation-security-services-setup component to automate AWS security services configuration (GuardDuty, Security Hub, IAM Access Analyzer, AWS Config, Detective, and Inspector delegation and setup across the organization), including updates to apps.example configuration files.
+
 ## v2.4.0
     * Added data/ML services (Athena, Batch, CloudShell, Glue, QuickSight, SageMaker) to DeveloperAccess permission sets.
 

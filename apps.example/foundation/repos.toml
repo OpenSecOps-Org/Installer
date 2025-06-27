@@ -17,6 +17,9 @@ credits     = "Peter Bengtson's open-source utility to set up AWS SSO core confi
 url         = "https://github.com/OpenSecOps-Org/Foundation-AWS-Core-SSO-Configuration"
 
 [[repos]]
+name = "Foundation-security-services-setup"
+
+[[repos]]
 name = "Foundation-new-account-created-sns-topic"
 
 [[repos]]

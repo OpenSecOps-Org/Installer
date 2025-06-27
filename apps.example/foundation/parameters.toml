@@ -81,6 +81,32 @@ group-prefix = '{sso-group-prefix}'
 
 # --------------------------------------------------------------
 #
+# Foundation-security-services-setup
+#
+# --------------------------------------------------------------
+
+[Foundation-security-services-setup.setup-security-services]
+
+AWSConfigEnabled = 'Yes'
+GuardDutyEnabled = 'Yes'
+SecurityHubEnabled = 'Yes'
+IAMAccessAnalyzerEnabled = 'Yes'
+DetectiveEnabled = 'No'
+InspectorEnabled = 'No'
+
+admin-account = '{admin-account}'
+security-account = '{security-account}'
+main-region = '{main-region}'
+other-regions = '{other-regions}'
+all-regions = '{all-regions}'
+cross-account-role = '{cross-account-role}'
+org-id = '{org-id}'
+root-ou = '{root-ou}'
+
+
+
+# --------------------------------------------------------------
+#
 # Foundation-new-account-created-sns-topic
 #
 # --------------------------------------------------------------
