@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.5.4
+    * Updated ARCHITECTURE.md.
+
 ## v2.5.3
     * Fixed zsh comments.
 
