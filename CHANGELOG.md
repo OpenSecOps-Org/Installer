@@ -1,5 +1,8 @@
 # Change Log
 
+## v2.5.3
+    * Fixed zsh comments.
+
 ## v2.5.2
     * Fixed deploy script for Foundation-security-services-setup. Distributed to all repos.
     * Added ARCHITECTURE.md, describing the operation of the OpenSecOps Installer and its scripts.
