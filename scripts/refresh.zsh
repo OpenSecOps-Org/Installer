@@ -1,8 +1,20 @@
 #!/usr/bin/env zsh
 
 : '
-This script is used to manage and deploy applications in multiple directories.
-It copies scripts and .gitignore files to the specified REPO or to all directories.
+OpenSecOps Foundation Component Script Distribution System
+
+This script distributes core deployment scripts from the Installer to all Foundation components,
+ensuring consistent deployment behavior and capabilities across the OpenSecOps ecosystem.
+
+What it distributes:
+- deploy.py: Main deployment orchestration script with parameter resolution
+- setup.zsh: Git repository setup utilities for dual-repository workflow  
+- publish.zsh: Publication workflow for clean release management
+- .gitignore: Standardized ignore patterns for Foundation components
+
+The refresh mechanism maintains script consistency while allowing each component to have 
+its own repository and development workflow. This ensures all components have the latest
+deployment capabilities and bug fixes.
 
 Usage:
     ./refresh [--dev] [--push] [REPO_name]

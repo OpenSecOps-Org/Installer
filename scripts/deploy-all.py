@@ -1,5 +1,28 @@
 #!/usr/bin/env python3
 
+"""
+OpenSecOps Foundation Master Deployment Script
+
+This script orchestrates the deployment of all Foundation components in the correct order,
+ensuring dependencies are deployed before components that depend on them.
+
+What it does:
+- Discovers all Foundation components in the parent directory
+- Reads deployment order from foundation/deployment-order.toml
+- Deploys each component in sequence using their individual ./deploy scripts
+- Provides unified logging and error handling across all deployments
+- Supports dry-run mode for safe testing of the entire deployment sequence
+
+This is the primary entry point for deploying the complete OpenSecOps Foundation
+infrastructure across an AWS Organization.
+
+Usage:
+  ./deploy-all [--dry-run] [--verbose]
+
+The script automatically handles component dependencies and provides a single interface
+for deploying the entire Foundation security and compliance infrastructure.
+"""
+
 import os
 import subprocess
 import sys

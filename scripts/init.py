@@ -1,5 +1,29 @@
 #!/usr/bin/env python3
 
+"""
+OpenSecOps Foundation Environment Initialization Script
+
+This script initializes a new OpenSecOps Foundation development environment by discovering
+and setting up all Foundation components for development and deployment.
+
+What it does:
+- Discovers all Foundation-* repositories in the parent directory
+- Runs git setup (./setup) for each component to configure dual-repository workflow
+- Distributes latest deployment scripts via refresh mechanism
+- Validates component configurations and dependencies
+- Prepares the environment for unified deployment via deploy-all
+
+This is typically run once when setting up a new development environment or when
+onboarding new Foundation components to ensure they're properly integrated with
+the deployment system.
+
+Usage:
+  ./init
+
+The script provides a foundation-wide initialization that ensures all components
+are ready for development and deployment within the OpenSecOps ecosystem.
+"""
+
 import os
 import subprocess
 import sys

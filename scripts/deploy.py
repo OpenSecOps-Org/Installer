@@ -1,5 +1,29 @@
 #!/usr/bin/env python3
 
+"""
+OpenSecOps Foundation Component Deployment Script
+
+This script provides unified deployment orchestration for OpenSecOps Foundation components,
+supporting multiple deployment patterns (SAM, CloudFormation, Scripts) with sophisticated
+parameter resolution and cross-account operations.
+
+Key Features:
+- Parameter resolution with cross-references ({parameter-name} syntax)
+- Computed parameters like {all-regions} from main-region + other-regions  
+- Cross-account role assumption for organization-wide deployments
+- Support for SAM serverless applications, CloudFormation infrastructure, and custom scripts
+- Dry-run mode for safe testing and validation
+- Verbose logging for debugging and monitoring
+
+Usage:
+  ./deploy [--dry-run] [--verbose]
+
+This script is distributed to all Foundation components via the refresh mechanism to ensure
+consistent deployment behavior across the OpenSecOps ecosystem.
+
+For detailed architecture information, see: Installer/ARCHITECTURE.md
+"""
+
 import os
 import sys
 import subprocess
@@ -110,8 +134,6 @@ def script_parameters_to_dictionary(script_name, params, repo_name):
     result = {}
     for k, v in section.items():
         v = dereference(v, params)
-        if isinstance(v, list):
-            v = ','.join(v)  # Convert list to comma-separated string
         result[k] = v
     return result
 
@@ -329,11 +351,22 @@ def process_scripts(scripts, repo_name, params, dry_run, verbose):
                 cmd.append(json_string)
             
             else:
-                result = dereference(v, our_params)
-                if isinstance(result, list):
-                    cmd.append(','.join(result))  # Convert list to comma-separated string
+                # Check if this parameter was already resolved in our_params
+                param_key = v.strip('{}') if v.startswith('{') and v.endswith('}') else None
+                if param_key and param_key in our_params:
+                    # Use the already-resolved value from our_params
+                    result = our_params[param_key]
+                    if isinstance(result, list):
+                        cmd.append(','.join(result))  # Convert list to comma-separated string
+                    else:
+                        cmd.append(result)
                 else:
-                    cmd.append(result)
+                    # Fall back to dereference for unresolved parameters
+                    result = dereference(v, our_params)
+                    if isinstance(result, list):
+                        cmd.append(','.join(result))  # Convert list to comma-separated string
+                    else:
+                        cmd.append(result)
 
         if verbose:
             printc(GRAY, '')
