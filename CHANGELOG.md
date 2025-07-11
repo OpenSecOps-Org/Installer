@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.5.5
+## v2.5.5
     * Added vpce:AllowMultiRegion to the NetworkAdministratorAccess SSO Permission Set.
 
 ## v2.5.4
