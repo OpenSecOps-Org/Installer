@@ -44,3 +44,4 @@ inline_policy:
                 - iam:*
                 - sts:AssumeRole
                 - support:*
+                - vpce:AllowMultiRegion
