@@ -42,6 +42,8 @@ Resources:
             - application-autoscaling:*
             - appmesh:*
             - autoscaling:*
+            - backup:*
+            - backup-storage:*
             - cloudformation:*
             - cloudtrail:*
             - cloudwatch:*

@@ -1,5 +1,9 @@
 # Change Log
 
+## v2.6.0
+    * Added IAM user management permissions to SecurityAdministratorAccess role in protect-foundations.json SCP.
+    * Added backup:* and backup-storage:* permissions to DeveloperAccess SSO permission set and permission boundary.
+
 ## v2.5.5
     * Added vpce:AllowMultiRegion to the NetworkAdministratorAccess SSO Permission Set.
 

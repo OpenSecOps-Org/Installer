@@ -63,6 +63,8 @@ inline_policy:
               - appmesh:*
               - athena:*
               - autoscaling:*
+              - backup:*
+              - backup-storage:*
               - batch:*
               - cloudformation:*
               - cloudshell:*
