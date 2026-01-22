@@ -80,9 +80,12 @@
             }
         },
         {
-            "Sid": "DenyBPDeletion",
+            "Sid": "DenyBPDeletionAndReplacement",
             "Effect": "Deny",
-            "Action": "iam:DeleteRolePermissionsBoundary",
+            "Action": [
+                "iam:DeleteRolePermissionsBoundary",
+                "iam:PutRolePermissionsBoundary"
+            ],
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
