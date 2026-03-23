@@ -49,14 +49,25 @@
             "Sid": "PreventUserMutations",
             "Effect": "Deny",
             "Action": [
+                "iam:AddUserToGroup",
+                "iam:AttachGroupPolicy",
                 "iam:AttachUserPolicy",
+                "iam:CreateAccessKey",
+                "iam:CreateGroup",
+                "iam:CreateLoginProfile",
                 "iam:CreateUser",
+                "iam:DeleteGroup",
+                "iam:DeleteGroupPolicy",
                 "iam:DeleteUser*",
+                "iam:DetachGroupPolicy",
                 "iam:DetachUserPolicy",
+                "iam:PutGroupPolicy",
                 "iam:PutUser*",
                 "iam:RemoveUserFromGroup",
                 "iam:TagUser",
                 "iam:UnTagUser",
+                "iam:UpdateAccessKey",
+                "iam:UpdateLoginProfile",
                 "iam:UpdateUser"
             ],
             "Resource": ["*"],
@@ -87,6 +98,25 @@
                         "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
                         "arn:aws:iam::*:role/stacksets-exec-*",
                         "arn:aws:iam::*:role/iam-password-policy-resource-execution-role"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ProtectAdminRoleTrustPolicies",
+            "Effect": "Deny",
+            "Action": "iam:UpdateAssumeRolePolicy",
+            "Resource": [
+                "arn:aws:iam::*:role/AWSControlTowerExecution",
+                "arn:aws:iam::*:role/stacksets-exec-*",
+                "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*"
+            ],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
                     ]
                 }
             }

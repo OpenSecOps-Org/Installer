@@ -1,5 +1,13 @@
 # Change Log
 
+## v2.7.0
+    * Fixed additional edge-case privilege escalation vulnerabilities in permissions boundary enforcement.
+    * `require-boundary-permissions.json`: Added `PutRolePermissionsBoundary` to per-SSO-role statements, added universal catch-all for non-SSO principals, separated boundary deletion into its own statement.
+    * `protect-foundations.json`: Added `ProtectAdminRoleTrustPolicies` statement to prevent trust policy modification on admin-exempted roles. Expanded `PreventUserMutations` to cover credential management (`CreateAccessKey`, `CreateLoginProfile`, etc.) and group operations.
+    * **Action required**: Copy the following files from `apps.example/` to `apps/` and redeploy:
+        - `foundation/SCPs/require-boundary-permissions.json`
+        - `foundation/SCPs/protect-foundations.json`
+
 ## v2.6.1
     * Added protection for switching boundary permissions using SCP.
 

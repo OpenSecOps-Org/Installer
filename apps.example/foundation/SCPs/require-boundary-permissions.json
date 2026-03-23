@@ -4,7 +4,10 @@
         {
             "Sid": "Developers",
             "Effect": "Deny",
-            "Action": "iam:CreateRole",
+            "Action": [
+                "iam:CreateRole",
+                "iam:PutRolePermissionsBoundary"
+            ],
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
@@ -22,7 +25,10 @@
         {
             "Sid": "NetworkAdministrators",
             "Effect": "Deny",
-            "Action": "iam:CreateRole",
+            "Action": [
+                "iam:CreateRole",
+                "iam:PutRolePermissionsBoundary"
+            ],
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
@@ -40,7 +46,10 @@
         {
             "Sid": "SecurityAdministrators",
             "Effect": "Deny",
-            "Action": "iam:CreateRole",
+            "Action": [
+                "iam:CreateRole",
+                "iam:PutRolePermissionsBoundary"
+            ],
             "Resource": "*",
             "Condition": {
                 "ArnLike": {
@@ -51,6 +60,29 @@
                 "ArnNotLike": {
                     "iam:PermissionsBoundary": [
                         "arn:aws:iam::*:policy/security-administrator-permission-boundary-policy"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "DenyNonAdminWithoutApprovedBoundary",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreateRole",
+                "iam:PutRolePermissionsBoundary"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "ArnNotLike": {
+                    "iam:PermissionsBoundary": [
+                        "arn:aws:iam::*:policy/developer-permission-boundary-policy",
+                        "arn:aws:iam::*:policy/network-administrator-permission-boundary-policy",
+                        "arn:aws:iam::*:policy/security-administrator-permission-boundary-policy"
+                    ],
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
                     ]
                 }
             }
@@ -80,17 +112,11 @@
             }
         },
         {
-            "Sid": "DenyBPDeletionAndReplacement",
+            "Sid": "DenyBPDeletion",
             "Effect": "Deny",
-            "Action": [
-                "iam:DeleteRolePermissionsBoundary",
-                "iam:PutRolePermissionsBoundary"
-            ],
+            "Action": "iam:DeleteRolePermissionsBoundary",
             "Resource": "*",
             "Condition": {
-                "ArnLike": {
-                    "iam:PermissionsBoundary": "arn:aws:iam::*:policy/*-permission-boundary-policy"
-                },
                 "ArnNotLike": {
                     "aws:PrincipalArn": [
                         "arn:aws:iam::*:role/AWSControlTowerExecution",
