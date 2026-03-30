@@ -42,7 +42,7 @@ scps:
 
   - name: protect-sso
     description: |
-      Protects Permission Sets from modification.    
+      Protects Permission Sets from modification.
     resource_file: protect-sso.json
     deployment_targets:
       organizational_units:

@@ -122,6 +122,31 @@
             }
         },
         {
+            "Sid": "DenyFederationProviderMutation",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreateOpenIDConnectProvider",
+                "iam:DeleteOpenIDConnectProvider",
+                "iam:UpdateOpenIDConnectProviderThumbprint",
+                "iam:AddClientIDToOpenIDConnectProvider",
+                "iam:RemoveClientIDFromOpenIDConnectProvider",
+                "iam:CreateSAMLProvider",
+                "iam:DeleteSAMLProvider",
+                "iam:UpdateSAMLProvider"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "ArnNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::*:role/AWSControlTowerExecution",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_AWSAdministratorAccess_*",
+                        "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_SecurityAdministratorAccess_*",
+                        "arn:aws:iam::*:role/stacksets-exec-*"
+                    ]
+                }
+            }
+        },
+        {
             "Sid": "DenyAFTCustomFieldsModification",
             "Effect": "Deny",
             "Action": [

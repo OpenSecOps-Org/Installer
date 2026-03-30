@@ -41,7 +41,14 @@ inline_policy:
                 - cur:Get*
                 - freetier:Get*
                 - health:Describe*
-                - iam:*
+                - iam:CreateServiceLinkedRole
+                - iam:GetRole
+                - iam:GetPolicy
+                - iam:ListAttachedRolePolicies
+                - iam:ListPolicies
+                - iam:ListRolePolicies
+                - iam:ListRoles
+                - iam:PassRole
                 - sts:AssumeRole
                 - support:*
                 - vpce:AllowMultiRegion

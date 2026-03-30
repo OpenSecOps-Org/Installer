@@ -41,10 +41,13 @@ Resources:
             - apigatewayv2:*
             - application-autoscaling:*
             - appmesh:*
+            - athena:*
             - autoscaling:*
             - backup:*
             - backup-storage:*
+            - batch:*
             - cloudformation:*
+            - cloudshell:*
             - cloudtrail:*
             - cloudwatch:*
             - codebuild:*
@@ -71,6 +74,7 @@ Resources:
             - firehose:*
             - fsx:*
             - glacier:*
+            - glue:*
             - inspector:*
             - kinesis:*
             - kms:*
@@ -80,11 +84,14 @@ Resources:
             - organizations:List*
             - outposts:*
             - pi:*
+            - quicksight:*
             - rds:*
             - resource-groups:*
             - s3-object-lambda:*
             - s3:*
+            - sagemaker:*
             - secretsmanager:*
+            - securityhub:*
             - servicediscovery:*
             - sns:*
             - sqs:*

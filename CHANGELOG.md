@@ -1,5 +1,16 @@
 # Change Log
 
+## v2.8.0
+    * `protect-infra-immutable.json`: Extended `infra:immutable` tag protection to EC2, S3, Lambda, DynamoDB, SQS, SSM, Elastic Load Balancing, and CloudWatch Logs. Previously, tag removal and resource modification were only blocked for a subset of services.
+    * `protect-foundations.json`: Added `DenyFederationProviderMutation` statement blocking OIDC and SAML provider creation and modification by non-admin principals. SecurityAdministratorAccess is exempted.
+    * `NetworkAdministratorAccess.yaml`: Narrowed `iam:*` to the specific IAM actions required for network administration.
+    * `developer-permission-boundary-policy.yaml`: Added athena, batch, cloudshell, glue, quicksight, sagemaker, and securityhub to match the DeveloperAccess permission set.
+    * **Action required**: Copy the following files from `apps.example/` to `apps/` and redeploy:
+        - `foundation/SCPs/protect-infra-immutable.json`
+        - `foundation/SCPs/protect-foundations.json`
+        - `foundation/sso-config/sso_permission_sets/NetworkAdministratorAccess.yaml`
+        - `foundation/BoundaryPolicies/developer-permission-boundary-policy.yaml`
+
 ## v2.7.0
     * Fixed additional edge-case privilege escalation vulnerabilities in permissions boundary enforcement.
     * `require-boundary-permissions.json`: Added `PutRolePermissionsBoundary` to per-SSO-role statements, added universal catch-all for non-SSO principals, separated boundary deletion into its own statement.
