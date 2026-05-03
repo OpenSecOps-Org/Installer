@@ -45,6 +45,7 @@ SCRIPTS=(
     "_scan-updates.sh"
     "_generate-security-md.sh"
     "_aggregate-sbom.sh"
+    "_bundle-evidence.sh"
     "_requirements_lib.sh"
 )
 # Files whose basename starts with `_` are distributed but PRIVATE —
