@@ -1,5 +1,13 @@
 # Change Log
 
+## v3.0.0
+    * BREAKING: coordinated with SOAR v3.0.0 which drops OpenAI direct integration. `AIProvider` in `apps/soar/parameters.toml` must be `BEDROCK` or `NONE` before upgrading; `OPENAI` is no longer accepted.
+    * Removed 4 ChatGPT entries from `apps.example/soar/parameters.toml` (`ChatGPTOrganizationIdParameterPath`, `ChatGPTAPIKeyParameterPath`, `ChatGPTDefaultModel`, `ChatGPTFallbackModel`).
+    * Customer-side Python deps installed by `./init` (`boto3`, `toml`, `yq`, plus all transitives) are now version-pinned and **SHA-256-hash-verified** at install time. The Installer's pyenv-managed Python 3.12.2 receives a deterministic, supply-chain-verified set of packages from a committed `requirements.txt`. Tampering or PyPI substitution is caught by `pip --require-hashes` before any byte is installed.
+    * Added `SECURITY.md` at the Installer's root, documenting the supply-chain posture, governance model, vulnerability-reporting channel, and CVE response SLA.
+    * GitHub Releases now include a CycloneDX SBOM as a downloadable asset (`Installer-<VERSION>-sbom.cdx.json`). Customers and intake reviewers can verify the dependency tree without cloning.
+    * **Action required**: In your local `apps/soar/parameters.toml`, delete the same 4 `ChatGPT*` entries. If `AIProvider = "OPENAI"`, switch to `"BEDROCK"` (and configure `BedrockRegion` / `BedrockModel`) or `"NONE"` before deploying SOAR v3.0.0. If you're upgrading from before v2.8.0, also apply the `apps/` file updates documented in v2.8.0 and v2.7.0 below.
+
 ## v2.8.0
     * `protect-infra-immutable.json`: Extended `infra:immutable` tag protection to EC2, S3, Lambda, DynamoDB, SQS, SSM, Elastic Load Balancing, and CloudWatch Logs. Previously, tag removal and resource modification were only blocked for a subset of services.
     * `protect-foundations.json`: Added `DenyFederationProviderMutation` statement blocking OIDC and SAML provider creation and modification by non-admin principals. SecurityAdministratorAccess is exempted.

@@ -1,0 +1,23 @@
+# Installer runtime deps (installed by `./init` into the customer's
+# pyenv-managed Python 3.12.2). Compiled to `requirements.txt` by
+# `compile-requirements.sh`; installed at customer setup time via
+# `pip install --require-hashes -r requirements.txt`.
+#
+# This is the only requirements file in the Installer — it has no
+# Lambda functions and is not packaged by `sam build`. The supply-chain
+# pipeline (drift / CVE / hash / OSV / provenance) applies uniformly
+# from this single .in file.
+
+# boto3 — pinned via the canonical shared source so the Installer's
+# AWS SDK matches every Lambda function's pin across the OpenSecOps
+# suite.
+-r templates/boto3.in
+
+# TOML reader/writer used by deploy.py and deploy-all.py to parse
+# apps/*/parameters.toml + apps/*/repos.toml. (stdlib `tomllib` is
+# read-only; toml package supports both.)
+toml>=0.10.0,<1.0.0
+
+# YAML/JSON query tool used during deployment to extract values from
+# CloudFormation outputs and similar structures.
+yq>=3.0.0,<4.0.0

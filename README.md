@@ -50,9 +50,11 @@ Checking that sam is installed... OK
 Checking that pyenv is installed... OK
 Checking that git is installed... OK
 Cheching that Python 3.12.2 is installed... Installing Python 3.12.2... OK
-Checking that boto3 is installed... boto3 is now installed.
-Checking that toml package is installed... toml package is now installed.
-Checking that yq package is installed... yq package is now installed.
+Pinned, hash-verified Installer dependencies:
+  boto3==1.42.94
+  toml==0.10.2
+  yq==3.4.3
+  ... installing (hash-verified)... OK
 Downloading repo /Users/john_doe/Documents/Projects/AWS-Governance/OPENSECOPS/SOAR-sec-hub-configuration... OK
 Downloading repo /Users/john_doe/Documents/Projects/AWS-Governance/OPENSECOPS/SOAR-detect-log-buckets... OK
 Downloading repo /Users/john_doe/Documents/Projects/AWS-Governance/OPENSECOPS/SOAR... OK
@@ -73,9 +75,11 @@ Checking that sam is installed... OK
 Checking that pyenv is installed... OK
 Checking that git is installed... OK
 Cheching that Python 3.12.2 is installed... OK
-Checking that boto3 is installed... OK
-Checking that toml package is installed... OK
-Checking that yq package is installed... OK
+Pinned, hash-verified Installer dependencies:
+  boto3==1.42.94
+  toml==0.10.2
+  yq==3.4.3
+  ... already installed at pinned versions ✓
 Updating repo SOAR-sec-hub-configuration... OK
 Updating repo SOAR-detect-log-buckets... Changes
 Updating repo SOAR... OK
@@ -95,9 +99,11 @@ Checking that sam is installed... OK
 Checking that pyenv is installed... OK
 Checking that git is installed... OK
 Cheching that Python 3.12.2 is installed... OK
-Checking that boto3 is installed... OK
-Checking that toml package is installed... OK
-Checking that yq package is installed... OK
+Pinned, hash-verified Installer dependencies:
+  boto3==1.42.94
+  toml==0.10.2
+  yq==3.4.3
+  ... already installed at pinned versions ✓
 Updating repo SOAR-sec-hub-configuration... OK
 Updating repo SOAR-detect-log-buckets... OK
 Updating repo SOAR... OK
@@ -194,4 +200,30 @@ It’s generally prudent to do a dry run first to see what is going to change, b
 NB: You can always delete all repositories, including the `Installer` one, provided you keep `Installer/apps` where all your configuration lives. There is no configuration in the individual repositories. 
 
 If you delete the component repo directories, all you need to do is `./init` and fresh copies will be downloaded from opensecops.org’s central repositories.
+
+
+## Maintainer notes
+
+The remainder of this section is for OpenSecOps core maintainers and is not relevant to customers running `./init` / `./deploy-all`.
+
+### Updating the Installer's own pinned dependencies
+
+The Installer pins its three runtime Python deps (`boto3`, `toml`, `yq`, plus their transitives) in a hash-verified `requirements.txt`. To bump a version:
+
+1. Edit either:
+   - `requirements.in` — for `toml` or `yq` bumps, or to add/remove a dep, **or**
+   - `templates/boto3.in` — for the suite-wide `boto3` pin (this also affects SOAR's Lambda code; SOAR must be re-compiled separately).
+2. Run `./bump-installer` from the Installer root. This wraps:
+   - `compile-requirements.sh` — regenerates `requirements.txt` (hashed lock), `requirements.cdx.json` (per-tree SBOM), `requirements.provenance.json` (PyPI metadata baseline).
+   - `_check-requirements.sh` — drift / CVE / hash integrity / OSV malware feed / provenance drift verification.
+   - `_generate-security-md.sh` — re-renders `SECURITY.md` (idempotent if nothing template-side changed).
+3. Inspect `git status`, commit, push.
+
+`./bump-installer --dry-run` skips the compile step and runs only the read-only verification against the currently-committed lock — useful for confirming "is my committed state still gate-clean today?" (e.g. against a freshly-disclosed CVE, an OSSF malware-feed update, or PyPI provenance changes) without intending to bump anything. Working tree stays clean.
+
+`bump-installer` is intentionally Installer-only — it is not in `refresh.zsh`'s SCRIPTS array and is not distributed to component repos. Component repos use `./compile-requirements` + `./publish` directly per their own workflow.
+
+### Releasing the Installer
+
+Releases follow the standard OpenSecOps `./publish` workflow once `apps/` (excluded from source control) is configured for the maintainer's deployment account. `./publish` runs the full release gate (drift / CVE / hash integrity / OSV malware feed / provenance), generates a CycloneDX SBOM, and creates a GitHub Release on the OpenSecOps remote with the SBOM attached as an asset.
 

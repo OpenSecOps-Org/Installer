@@ -1,0 +1,36 @@
+{
+  "direct_deps": {
+    "boto3": {
+      "author": "Amazon Web Services",
+      "author_email": "",
+      "home_page": "https://github.com/boto/boto3",
+      "maintainer": "",
+      "maintainer_email": "",
+      "project_urls": {
+        "Documentation": "https://docs.aws.amazon.com/boto3/latest/",
+        "Homepage": "https://github.com/boto/boto3",
+        "Source": "https://github.com/boto/boto3"
+      }
+    },
+    "toml": {
+      "author": "William Pearson",
+      "author_email": "uiri@xqz.ca",
+      "home_page": "https://github.com/uiri/toml",
+      "maintainer": "",
+      "maintainer_email": "",
+      "project_urls": {
+        "Homepage": "https://github.com/uiri/toml"
+      }
+    },
+    "yq": {
+      "author": "Andrey Kislyuk",
+      "author_email": "kislyuk@gmail.com",
+      "home_page": "https://github.com/kislyuk/yq",
+      "maintainer": "",
+      "maintainer_email": "",
+      "project_urls": {
+        "Homepage": "https://github.com/kislyuk/yq"
+      }
+    }
+  }
+}
