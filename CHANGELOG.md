@@ -1,5 +1,9 @@
 # Change Log
 
+## v3.0.3
+    * `SECURITY.md.template` §4 (Continuous detection) rewritten as a two-bullet "two layers operate today" structure: release-time gate plus push-based GitHub Dependabot alerts, now enabled on every OpenSecOps repository. Alerts-only mode (auto-PR security updates and routine version-update PRs are explicitly disabled, consistent with the cathedral governance model). No SLA on detection-to-notification latency. Poll-based daily-scan CI carries a pointer-only follow-up note. Refresh-distributed to every component repo; `Installer/SECURITY.md` regenerated from the updated template.
+    * No customer action required. `./init` and `./deploy-all` workflows are unchanged.
+
 ## v3.0.2
     * `SECURITY.md` §14 now links to the OpenSecOps Documentation supply-chain page.
 
