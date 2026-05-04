@@ -237,6 +237,35 @@ do
         echo -e "${YELLOW}Copying $SECURITY_TEMPLATE_FILE to $REPO/SECURITY.md.template${END}"
         cp "$SECURITY_TEMPLATE_FILE" "$REPO/SECURITY.md.template"
 
+        # Copy GitHub Actions workflow templates (byte-identical
+        # canonical sources). Distributed as `.yml.disabled` so they
+        # don't run automatically; each converted repo's maintainer
+        # renames to `.yml` to enable. The `.disabled` suffix is
+        # recognised by GitHub as inert.
+        #
+        # If the maintainer has already enabled a workflow (renamed
+        # `<name>.yml.disabled` to `<name>.yml`), skip the `.disabled`
+        # distribution for that workflow — the active `.yml` is the
+        # canonical version on that repo, and re-creating `.disabled`
+        # alongside it would just be clutter. Workflow content updates
+        # on already-enabled workflows are a deliberate maintainer
+        # action: review the new template, copy across the changes,
+        # commit; same shape as any other refresh-distributed-then-
+        # locally-customised file.
+        mkdir -p "$REPO/.github/workflows"
+        for WF in templates/.github/workflows/*.disabled
+        do
+            WF_BASENAME=$(basename "$WF")
+            WF_ENABLED_NAME="${WF_BASENAME%.disabled}"
+            if [[ -f "$REPO/.github/workflows/$WF_ENABLED_NAME" ]]
+            then
+                echo -e "${YELLOW}Workflow $WF_ENABLED_NAME already enabled in $REPO; skipping $WF_BASENAME distribution${END}"
+            else
+                echo -e "${YELLOW}Copying $WF to $REPO/.github/workflows/$WF_BASENAME${END}"
+                cp "$WF" "$REPO/.github/workflows/$WF_BASENAME"
+            fi
+        done
+
         # Conditionally distribute boto3.in — applies the boto3
         # distribution-detection rule. The detection itself ran earlier
         # (above the scripts/ wipe) so it sees the repo's original
