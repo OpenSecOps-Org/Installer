@@ -1,6 +1,6 @@
 # README
 
-[![Daily CVE scan](https://github.com/OpenSecOps-Org/Installer/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/OpenSecOps-Org/Installer/actions/workflows/daily-scan.yml) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/OpenSecOps-Org/Installer/badge)](https://scorecard.dev/viewer/?uri=github.com/OpenSecOps-Org/Installer)
+[![Daily CVE scan](https://github.com/OpenSecOps-Org/Installer/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/OpenSecOps-Org/Installer/actions/workflows/daily-scan.yml) [![OpenSSF Scorecard](https://github.com/OpenSecOps-Org/Installer/actions/workflows/scorecard.yml/badge.svg)](https://github.com/OpenSecOps-Org/Installer/actions/workflows/scorecard.yml)
 
 This is the installer for OpenSecOps Foundation and OpenSecOps SOAR. It is used to prepare your
 workspace, check that you have installed all prerequisites, download all repos required, 
