@@ -21,3 +21,10 @@ toml>=0.10.0,<1.0.0
 # YAML/JSON query tool used during deployment to extract values from
 # CloudFormation outputs and similar structures.
 yq>=3.0.0,<4.0.0
+
+# Sigstore client — used by deploy.py to verify that each component's
+# checked-out source corresponds to a Sigstore-signed GitHub Release
+# published by the OpenSecOps maintainer identity. Pure-Python; talks
+# to Rekor (transparency log) + Fulcio (CA) over HTTPS; no native
+# binaries; no OIDC dance customer-side (verify is read-only).
+sigstore>=4.0.0,<5.0.0

@@ -12,6 +12,19 @@
         "Source": "https://github.com/boto/boto3"
       }
     },
+    "sigstore": {
+      "author": "",
+      "author_email": "Sigstore Authors <sigstore-dev@googlegroups.com>",
+      "home_page": "",
+      "maintainer": "",
+      "maintainer_email": "",
+      "project_urls": {
+        "Documentation": "https://sigstore.github.io/sigstore-python/",
+        "Homepage": "https://pypi.org/project/sigstore/",
+        "Issues": "https://github.com/sigstore/sigstore-python/issues",
+        "Source": "https://github.com/sigstore/sigstore-python"
+      }
+    },
     "toml": {
       "author": "William Pearson",
       "author_email": "uiri@xqz.ca",

@@ -49,6 +49,7 @@ SCRIPTS=(
     "_generate-provenance.sh"
     "_acquire-oidc-token.sh"
     "_requirements_lib.sh"
+    "_verify_release.py"
 )
 # Files whose basename starts with `_` are distributed but PRIVATE —
 # no top-level symlink is created for them in --dev mode. This covers

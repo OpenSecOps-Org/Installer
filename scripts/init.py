@@ -69,6 +69,32 @@ def _installer_root():
     return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
+def _load_verifier():
+    # Late-import the shared verifier so that sigstore (a pinned Python dep)
+    # can be installed by install_python_packages() first. Returns the
+    # verify_release function or None if import fails.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        '_verify_release',
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), '_verify_release.py'))
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except ImportError:
+        return None
+    return mod.verify_release
+
+
+def verify_installer_self(verifier):
+    # Verify that the Installer's own checkout corresponds to a signed
+    # GitHub Release. Closes the bootstrap gap: a customer who pulls a
+    # tampered Installer would have their malicious init.py refuse to
+    # proceed at this point (assuming the attacker hasn't also stripped
+    # this check out — TOFU applies to first install only; every
+    # subsequent update is verified before doing anything destructive).
+    return verifier("Installer", repo_dir=_installer_root())
+
+
 def _read_direct_deps_with_versions():
     """Return [(name, pinned_version), ...] for the Installer's direct deps.
 
@@ -253,6 +279,23 @@ def main():
     setup_python_environment(required_python_version)
     install_python_packages()
 
+    # --- Release verification setup ---------------------------------------
+    # sigstore was just pip-installed above, so the shared verifier module
+    # can now be imported. On first-ever install (no sigstore yet at module
+    # load time of init.py), this is the earliest point we can call it.
+    verifier = _load_verifier()
+    if verifier is None:
+        printc(YELLOW,
+            "sigstore not available; release verification is unavailable for this run. "
+            "Re-run ./init to pick it up.")
+    else:
+        # Self-verify the Installer's own current checkout. If the customer
+        # pulled a tampered Installer, this is where we catch it.
+        printc(LIGHT_BLUE, "\nVerifying Installer release signature...")
+        if not verify_installer_self(verifier):
+            printc(RED, "Installer self-verification FAILED. Refusing to proceed.")
+            return
+
     # We can now load toml
     import toml
 
@@ -264,13 +307,26 @@ def main():
 
     config = toml.load(config_file)
 
-    # Clone necessary repos
+    # Clone necessary repos, verifying each one's signed release as we go.
+    # Eager check here means problems are surfaced at init rather than only
+    # at deploy time (deploy.py runs the same verifier just-in-time too).
     base_url = config['GitHub']['source_base_url']
+    verify_failures = []
     for repo in config['repos']:
         repo_name = repo['name']
         repo_url = base_url + repo_name + '.git'
         repo_path = os.path.join(parent_dir, repo_name)
         clone_repo(repo_url, repo_path, repo_name)
+        if verifier is not None:
+            if not verifier(repo_name, repo_dir=repo_path):
+                verify_failures.append(repo_name)
+
+    if verify_failures:
+        printc(RED,
+            f"\n{len(verify_failures)} component(s) failed release verification: "
+            f"{', '.join(verify_failures)}")
+        printc(RED,
+            "Do not run ./deploy in these components until the issue is resolved.")
 
 if __name__ == '__main__':
     main()
