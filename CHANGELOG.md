@@ -1,5 +1,8 @@
 # Change Log
 
+## v3.0.13
+    * `README.md` gains the OpenSSF Best Practices Passing-level badge (project entry [bestpractices.dev/projects/12827](https://www.bestpractices.dev/projects/12827)).
+
 ## v3.0.12
     * Libraryless conversion path. `publish.zsh` now auto-detects components with no Python library dependencies (zero `requirements.in` files under the repo, excluding the usual non-source dirs) and emits a deterministic `git archive HEAD` source archive plus a SLSA Build L1 in-toto provenance attesting to it, both Sigstore-signed. Repos with `.in` files continue to use the existing SBOM + evidence + provenance path — backward compatible, no change for the 12 originally converted repos. Detection is filesystem-based; no config flag needed. Documented in `convert-component` skill under "Procedure (libraryless repos)".
     * `STRICT_VERIFICATION = True` in `_verify_release.py`. Phase 10 closed on 2026-05-13 — every repo in `apps/foundation/repos.toml` and `apps/soar/repos.toml` now ships signed releases. The "skipped, work in progress" banner path is gone; a converted release without signed bundles now fails closed.
