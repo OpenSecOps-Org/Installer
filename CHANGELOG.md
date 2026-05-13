@@ -1,5 +1,9 @@
 # Change Log
 
+## v3.0.9
+    * Security: bump `urllib3` floor to `>=2.7.0` in canonical `templates/boto3.in` to remediate CVE-2026-44431 and CVE-2026-44432 (both affect urllib3 ≤ 2.6.3, fixed in 2.7.0). `boto3==1.42.94` previously resolved urllib3 transitively to 2.6.3 across the fleet; the new floor forces resolution to 2.7.0 in every component that imports `boto3.in`. Distributed via `refresh` to all components; each component re-releases independently with recompiled locks.
+    * Installer's own `requirements.txt` recompiled (urllib3 → 2.7.0); no code changes.
+
 ## v3.0.8
     * Enable auto-close workflow for external pull requests, enforcing the cathedral governance policy uniformly across all OpenSecOps repositories. Pull requests from non-team authors are closed automatically with a redirect comment pointing to the bug-report template, the GitHub Security Advisory flow, and the fork-under-MPL-2.0 path. Distributed by `refresh` to all components.
     * `SECURITY.md.template` §14 now carries a Trust-page cross-link ([opensecops.org/trust.html](https://www.opensecops.org/trust.html)) alongside the existing canonical supply-chain document link, positioning the Trust page as the lighter customer-facing synthesis. Installer's own `SECURITY.md` regenerated to match; distributed to all components via `refresh` and rendered on each component's next publish.
