@@ -756,7 +756,7 @@
       ]
     }
   },
-  "serialNumber": "urn:uuid:46f9e6cb-430c-5097-8fcb-93d093364e6d",
+  "serialNumber": "urn:uuid:ebcfb32a-1506-5aa1-9157-a9c410d47f6c",
   "version": 1,
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",

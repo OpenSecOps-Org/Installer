@@ -1,5 +1,8 @@
 # Change Log
 
+## v3.0.10
+    * Tooling: `compile-requirements.sh` now accepts `--upgrade` and `--upgrade-package PKG` (repeatable) flags, plumbed through to `uv pip compile`. Previously the script only used existing locks as preferences, which meant any package with a newer in-range release on PyPI since the last compile would cause the release-gate's reproducible mode (clean cache, no preferences) to report drift and refuse to publish. Maintainers can now run `./compile-requirements --upgrade` to refresh every lock, or `./compile-requirements --upgrade-package urllib3` for a minimum-change CVE patch. Active mode is surfaced in the banner (`uv args: --upgrade-package urllib3`). Distributed to all converted components via `refresh`; available on each component's next release cycle.
+
 ## v3.0.9
     * Security: bump `urllib3` floor to `>=2.7.0` in canonical `templates/boto3.in` to remediate CVE-2026-44431 and CVE-2026-44432 (both affect urllib3 ≤ 2.6.3, fixed in 2.7.0). `boto3==1.42.94` previously resolved urllib3 transitively to 2.6.3 across the fleet; the new floor forces resolution to 2.7.0 in every component that imports `boto3.in`. Distributed via `refresh` to all components; each component re-releases independently with recompiled locks.
     * Installer's own `requirements.txt` recompiled (urllib3 → 2.7.0); no code changes.
