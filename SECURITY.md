@@ -180,7 +180,9 @@ Customers who want to verify the lock files reproduce bit-identically from the r
 
 This is the override mechanism for the release gate: any CVE listed here is permitted to ship, on the documented rationale, until the resolution date.
 
-_None at this time._
+| CVE ID | Package | Acknowledged | Reason | Expected resolution |
+| --- | --- | --- | --- | --- |
+| PYSEC-2025-183 | pyjwt | 2026-05-20 | Disputed by supplier (CVE-2025-45768): the advisory concerns JWT signing-key length, which is chosen by the consuming application, not the library. The Installer does not sign JWTs directly; pyjwt is a transitive dependency of sigstore (used read-only to verify release signatures via Rekor/Fulcio). No fix version is published, and all pyjwt versions are listed as affected. | Re-evaluate if the advisory is withdrawn, a fix version is published, or sigstore drops the dependency. Drop this acknowledgement once any of those occurs. |
 
 Each entry, when present, contains: CVE ID, affected package, date acknowledged, reason (development-only dependency, contested advisory, fix pending upstream, no exploitable code path, etc.), and expected resolution.
 

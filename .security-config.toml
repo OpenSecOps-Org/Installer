@@ -9,3 +9,7 @@
 
 converted    = true
 converted_in = "v3.0.0"
+
+acknowledged_cves = [
+    { cve_id = "PYSEC-2025-183", package = "pyjwt", date_acknowledged = "2026-05-20", reason = "Disputed by supplier (CVE-2025-45768): the advisory concerns JWT signing-key length, which is chosen by the consuming application, not the library. The Installer does not sign JWTs directly; pyjwt is a transitive dependency of sigstore (used read-only to verify release signatures via Rekor/Fulcio). No fix version is published, and all pyjwt versions are listed as affected.", expected_resolution = "Re-evaluate if the advisory is withdrawn, a fix version is published, or sigstore drops the dependency. Drop this acknowledgement once any of those occurs." },
+]

@@ -1,5 +1,8 @@
 # Change Log
 
+## v3.0.14
+    * Acknowledge `PYSEC-2025-183` / `CVE-2025-45768` against `pyjwt` (transitive via `sigstore`). The advisory is disputed by the supplier — the alleged "weak encryption" concerns the JWT signing-key length, which is chosen by the consuming application rather than the library, and the Installer does not sign JWTs (pyjwt is used read-only by `sigstore` to verify Rekor/Fulcio responses during release verification). All `pyjwt` versions are listed as affected and no fix version is published. Recorded in `.security-config.toml`; `SECURITY.md` §12 regenerated.
+
 ## v3.0.13
     * `README.md` gains the OpenSSF Best Practices Passing-level badge (project entry [bestpractices.dev/projects/12827](https://www.bestpractices.dev/projects/12827)).
 
