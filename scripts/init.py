@@ -162,7 +162,7 @@ def _all_direct_deps_at_pinned_versions(direct_deps):
     return True
 
 
-def install_python_packages():
+def install_python_packages(verbose=True):
     """Install the Installer's pinned, hash-verified runtime deps.
 
     Deps + their hashes live in <Installer>/requirements.txt (committed,
@@ -170,16 +170,31 @@ def install_python_packages():
     requirements.in). The customer's pyenv-managed Python receives them
     via `pip install --require-hashes -r requirements.txt`, so
     tampering or PyPI substitution is detected at install time.
+
+    `verbose=False` suppresses the per-dep listing (used by per-repo
+    calls in clone_repo, where the Installer self-call has already
+    printed it) and collapses the fast path to a single line. Mismatch
+    + install output still prints the full listing so an unexpected
+    reinstall remains visible.
     """
     direct_deps = _read_direct_deps_with_versions()
 
-    printc(GREEN, "Pinned, hash-verified Installer dependencies:")
-    for name, version in direct_deps:
-        printc(GREEN, f"  {name}=={version}")
+    if verbose:
+        printc(GREEN, "Pinned, hash-verified Installer dependencies:")
+        for name, version in direct_deps:
+            printc(GREEN, f"  {name}=={version}")
 
     if _all_direct_deps_at_pinned_versions(direct_deps):
-        printc(GREEN, "  ... already installed at pinned versions ✓")
+        if verbose:
+            printc(GREEN, "  ... already installed at pinned versions ✓")
+        else:
+            printc(GREEN, "Pinned, hash-verified deps already installed ✓")
         return
+
+    if not verbose:
+        printc(GREEN, "Installer dependencies need (re)installing:")
+        for name, version in direct_deps:
+            printc(GREEN, f"  {name}=={version}")
 
     req_path = os.path.join(_installer_root(), "requirements.txt")
     printc(GREEN, "  ... installing (hash-verified)... ", end="")
@@ -190,20 +205,81 @@ def install_python_packages():
     )
     printc(GREEN, "OK")
 
+def _resync_existing_clone(path, name):
+    # Customer-side clones are vendored copies — no legitimate local
+    # edits or commits — so the safe operation is to replace local
+    # state with origin's. Handles stale clones, detached HEAD, wrong
+    # branch, and the recreated-remote case (unrelated histories;
+    # reset --hard does not care). Refuses only on a dirty working
+    # tree, since that's the one state where a customer might have
+    # unsaved work to inspect.
+    before = subprocess.run(
+        ['git', '-C', path, 'rev-parse', 'HEAD'],
+        capture_output=True, text=True).stdout.strip()
+
+    dirty = subprocess.run(
+        ['git', '-C', path, 'status', '--porcelain'],
+        capture_output=True, text=True).stdout
+    if dirty.strip():
+        printc(RED, "Dirty working tree")
+        printc(RED,
+            f"  {name} has uncommitted local changes. Inspect with "
+            f"`git -C {path} status`, then either commit/stash or "
+            f"`rm -rf {path}` and re-run ./init to fetch a fresh copy.")
+        return False
+
+    # -P (--prune-tags) is essential for the recreated-remote case
+    # so stale local tags don't confuse the downstream
+    # `git describe --tags --exact-match HEAD` in _verify_release.py.
+    fetch = subprocess.run(
+        ['git', '-C', path, 'fetch', '-p', '-P', 'origin'],
+        capture_output=True, text=True)
+    if fetch.returncode != 0:
+        printc(RED, "Fetch failed")
+        printc(RED, f"  {fetch.stderr.strip()}")
+        return False
+
+    # Single move that handles stale, divergent, detached,
+    # wrong-branch, and recreated-remote uniformly.
+    reset = subprocess.run(
+        ['git', '-C', path, 'reset', '--hard', 'origin/main'],
+        capture_output=True, text=True)
+    if reset.returncode != 0:
+        printc(RED, "Reset failed")
+        printc(RED, f"  {reset.stderr.strip()}")
+        return False
+
+    after = subprocess.run(
+        ['git', '-C', path, 'rev-parse', 'HEAD'],
+        capture_output=True, text=True).stdout.strip()
+    tag = subprocess.run(
+        ['git', '-C', path, 'describe', '--tags', '--exact-match', 'HEAD'],
+        capture_output=True, text=True)
+
+    if tag.returncode != 0:
+        # origin/main is between releases — maintainer-side condition,
+        # surfaced here rather than letting verification fail later
+        # with a less actionable message.
+        printc(YELLOW, "No release tag on HEAD")
+        printc(YELLOW,
+            f"  {name}: origin/main is not on a release tag. "
+            f"./deploy verification will refuse until the next "
+            f"signed release is published.")
+        return True
+
+    label = tag.stdout.strip()
+    if before != after:
+        printc(LIGHT_BLUE, f"Changes ({label})")
+    else:
+        printc(GREEN, f"No changes ({label})")
+    return True
+
+
 def clone_repo(url, path, name):
     if os.path.exists(path):
         printc(YELLOW, f"\rUpdating repo {name}... ", end="")
-        # Get current commit hash before pulling
-        before_pull = subprocess.run(['git', '-C', path, 'rev-parse', 'HEAD'], capture_output=True, text=True)
-        before_commit_hash = before_pull.stdout.strip()
-        subprocess.run(['git', '-C', path, 'pull', '--quiet'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        # Get current commit hash after pulling
-        after_pull = subprocess.run(['git', '-C', path, 'rev-parse', 'HEAD'], capture_output=True, text=True)
-        after_commit_hash = after_pull.stdout.strip()
-        if before_commit_hash != after_commit_hash:
-            printc(LIGHT_BLUE, "Changes")
-        else:
-            printc(GREEN, "No changes")
+        if not _resync_existing_clone(path, name):
+            return
     else:
         printc(YELLOW, f"\rDownloading repo {path}... ", end="")
         subprocess.run(['git', 'clone', url, path, '--quiet'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -220,8 +296,11 @@ def clone_repo(url, path, name):
         required_python_version = get_required_python_version()
         setup_python_environment(required_python_version)
         
-        # Install necessary Python packages for the repo
-        install_python_packages()
+        # Install necessary Python packages for the repo. Silent here
+        # because the Installer self-call earlier in main() has already
+        # printed the dep listing; per-repo calls normally hit the
+        # already-installed fast path and would just repeat it.
+        install_python_packages(verbose=False)
     finally:
         # Always revert to the original working directory
         os.chdir(original_dir)
