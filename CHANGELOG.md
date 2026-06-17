@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.0.17
+    * Security: bump `cryptography` 46.0.7 → 48.0.1 to clear `GHSA-537c-gmf6-5ccf` (vulnerable OpenSSL bundled in the `cryptography` wheels; availability impact). This required bumping `sigstore` 4.2.0 → 4.3.0 (within the existing `>=4.0.0,<5.0.0` pin), which lifts the transitive `cryptography <47` cap. `sigstore` 4.3.0 also permits `tuf <8`, allowing `tuf` 6.0.0 → 7.0.0 — which resolves the previously acknowledged `GHSA-qp9x-wp8f-qgjj`. That acknowledgement has been dropped from `.security-config.toml` and `SECURITY.md` regenerated. Lock recompiled and refreshed to latest in-range versions (`certifi`, `idna`, `rich` also moved) so it stays bit-reproducible.
+    * Replace the `--unsafe-untagged` flag with `--no-verify`, now available on `./init`, `./deploy`, and `./deploy-all` (previously `--unsafe-untagged` was on `./deploy` only). The old flag merely tolerated a non-release HEAD while still verifying signatures whenever a tag was present; `--no-verify` skips release signature verification entirely. It is a development-only override and prints a single loud audit banner once per run.
+    * `install_python_packages` is now silent on the happy path — output appears only when a dependency (re)install is actually needed.
+    * Add `bedrock:*` to the example developer permission boundary and the matching `DeveloperAccess` SSO permission set.
+
 ## v3.0.16
     * Bump `pyjwt` 2.12.1 → 2.13.0 (transitive via `sigstore`), clearing `PYSEC-2026-175`, `PYSEC-2026-177`, `PYSEC-2026-178`, and `PYSEC-2026-179`. Lock refreshed to latest in-range versions (`certifi`, `idna`, `platformdirs`, `requests`, `securesystemslib` also moved) so it stays bit-reproducible.
     * Acknowledge `GHSA-qp9x-wp8f-qgjj` against `tuf` (transitive via `sigstore`). The fix is `tuf` 7.0.0, but it is not installable: the latest `sigstore` (4.2.0, the pinned version) hard-caps `tuf~=6.0` (`<7.0`) and no `sigstore` release yet permits `tuf` 7.0. The flaw is a Windows-only TUF delegation path-matching case-sensitivity bug (CVSS 3.1 base ~3.3, Low); `tuf` is used read-only by `sigstore` for release verification and the Installer runs customer-side on POSIX Python 3.12. Recorded in `.security-config.toml`, to be dropped once `sigstore` permits `tuf` 7.0; `SECURITY.md` §12 regenerated.

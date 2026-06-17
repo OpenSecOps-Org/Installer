@@ -24,6 +24,7 @@ The script provides a foundation-wide initialization that ensures all components
 are ready for development and deployment within the OpenSecOps ecosystem.
 """
 
+import argparse
 import os
 import subprocess
 import sys
@@ -162,7 +163,7 @@ def _all_direct_deps_at_pinned_versions(direct_deps):
     return True
 
 
-def install_python_packages(verbose=True):
+def install_python_packages():
     """Install the Installer's pinned, hash-verified runtime deps.
 
     Deps + their hashes live in <Installer>/requirements.txt (committed,
@@ -171,30 +172,18 @@ def install_python_packages(verbose=True):
     via `pip install --require-hashes -r requirements.txt`, so
     tampering or PyPI substitution is detected at install time.
 
-    `verbose=False` suppresses the per-dep listing (used by per-repo
-    calls in clone_repo, where the Installer self-call has already
-    printed it) and collapses the fast path to a single line. Mismatch
-    + install output still prints the full listing so an unexpected
-    reinstall remains visible.
+    Silent on the happy path: when everything is already at the pinned
+    versions there is nothing to do and nothing to report. Output appears
+    only when a (re)install is actually needed — the case worth surfacing.
     """
     direct_deps = _read_direct_deps_with_versions()
 
-    if verbose:
-        printc(GREEN, "Pinned, hash-verified Installer dependencies:")
-        for name, version in direct_deps:
-            printc(GREEN, f"  {name}=={version}")
-
     if _all_direct_deps_at_pinned_versions(direct_deps):
-        if verbose:
-            printc(GREEN, "  ... already installed at pinned versions ✓")
-        else:
-            printc(GREEN, "Pinned, hash-verified deps already installed ✓")
         return
 
-    if not verbose:
-        printc(GREEN, "Installer dependencies need (re)installing:")
-        for name, version in direct_deps:
-            printc(GREEN, f"  {name}=={version}")
+    printc(GREEN, "Pinned, hash-verified dependencies need (re)installing:")
+    for name, version in direct_deps:
+        printc(GREEN, f"  {name}=={version}")
 
     req_path = os.path.join(_installer_root(), "requirements.txt")
     printc(GREEN, "  ... installing (hash-verified)... ", end="")
@@ -205,7 +194,7 @@ def install_python_packages(verbose=True):
     )
     printc(GREEN, "OK")
 
-def _resync_existing_clone(path, name):
+def _resync_existing_clone(path, name, no_verify=False):
     # Customer-side clones are vendored copies — no legitimate local
     # edits or commits — so the safe operation is to replace local
     # state with origin's. Handles stale clones, detached HEAD, wrong
@@ -257,6 +246,12 @@ def _resync_existing_clone(path, name):
         capture_output=True, text=True)
 
     if tag.returncode != 0:
+        if no_verify:
+            # Verification disabled for this run; tag state is irrelevant.
+            # Report only whether the resync actually moved HEAD.
+            printc(LIGHT_BLUE if before != after else GREEN,
+                   "Changes" if before != after else "No changes")
+            return True
         # origin/main is between releases — maintainer-side condition,
         # surfaced here rather than letting verification fail later
         # with a less actionable message.
@@ -275,10 +270,10 @@ def _resync_existing_clone(path, name):
     return True
 
 
-def clone_repo(url, path, name):
+def clone_repo(url, path, name, no_verify=False):
     if os.path.exists(path):
         printc(YELLOW, f"\rUpdating repo {name}... ", end="")
-        if not _resync_existing_clone(path, name):
+        if not _resync_existing_clone(path, name, no_verify=no_verify):
             return
     else:
         printc(YELLOW, f"\rDownloading repo {path}... ", end="")
@@ -296,11 +291,9 @@ def clone_repo(url, path, name):
         required_python_version = get_required_python_version()
         setup_python_environment(required_python_version)
         
-        # Install necessary Python packages for the repo. Silent here
-        # because the Installer self-call earlier in main() has already
-        # printed the dep listing; per-repo calls normally hit the
-        # already-installed fast path and would just repeat it.
-        install_python_packages(verbose=False)
+        # Install necessary Python packages for the repo. Silent unless a
+        # (re)install is actually needed.
+        install_python_packages()
     finally:
         # Always revert to the original working directory
         os.chdir(original_dir)
@@ -314,9 +307,21 @@ def main():
     current_dir = os.getcwd()
     parent_dir = os.path.dirname(current_dir)
 
+    # Parse arguments. `app` is an optional positional (SOAR/Foundation);
+    # --no-verify is the development escape hatch that skips release
+    # verification entirely (loud, audited — never for customer installs).
+    parser = argparse.ArgumentParser()
+    parser.add_argument('app', nargs='?', default=None,
+                        help="The application to set up (SOAR or Foundation).")
+    parser.add_argument('--no-verify', dest='no_verify', action='store_true',
+                        help='Skip release signature verification (development only; '
+                             'loud override, printed for audit)')
+    args = parser.parse_args()
+    no_verify = args.no_verify
+
     # Get the argument and convert it to lowercase
-    if len(sys.argv) > 1:
-        app = sys.argv[1].lower()
+    if args.app:
+        app = args.app.lower()
     else:
         # Check if any repos are installed for SOAR or Foundation
         installed_dirs = os.listdir(parent_dir)
@@ -363,7 +368,11 @@ def main():
     # can now be imported. On first-ever install (no sigstore yet at module
     # load time of init.py), this is the earliest point we can call it.
     verifier = _load_verifier()
-    if verifier is None:
+    if no_verify:
+        # Single, quiet notice for the whole run. Per-repo verification is
+        # skipped entirely below — no banners, no tag-state commentary.
+        printc(RED + BOLD, "\nRelease verification disabled (--no-verify).")
+    elif verifier is None:
         printc(YELLOW,
             "sigstore not available; release verification is unavailable for this run. "
             "Re-run ./init to pick it up.")
@@ -395,8 +404,8 @@ def main():
         repo_name = repo['name']
         repo_url = base_url + repo_name + '.git'
         repo_path = os.path.join(parent_dir, repo_name)
-        clone_repo(repo_url, repo_path, repo_name)
-        if verifier is not None:
+        clone_repo(repo_url, repo_path, repo_name, no_verify=no_verify)
+        if verifier is not None and not no_verify:
             if not verifier(repo_name, repo_dir=repo_path):
                 verify_failures.append(repo_name)
 

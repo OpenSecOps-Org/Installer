@@ -57,7 +57,7 @@ def check_aws_sso_session():
     return True
 
 
-def deploy_repo(repo, parent_dir, dry_run, verbose):
+def deploy_repo(repo, parent_dir, dry_run, verbose, no_verify=False):
     repo_name = repo['name']
     repo_path = os.path.join(parent_dir, repo_name)
     open_source = repo.get('open_source')
@@ -118,7 +118,7 @@ def deploy_repo(repo, parent_dir, dry_run, verbose):
 
         # Execute the deploy script
         printc(LIGHT_BLUE + BOLD, f"Deploying repo {repo_path}...")
-        subprocess.run(['python3', deploy_script] + (['--dry-run'] if dry_run else []) + (['--verbose'] if verbose else []), check=True)
+        subprocess.run(['python3', deploy_script] + (['--dry-run'] if dry_run else []) + (['--verbose'] if verbose else []) + (['--no-verify'] if no_verify else []), check=True)
     except Exception as e:
         printc(RED, f"An error occurred while deploying repo {repo_path}: {str(e)}")
         return False
@@ -134,6 +134,9 @@ def main():
     parser.add_argument("app", nargs='?', default=None, help="The application to deploy.")
     parser.add_argument("--dry-run", action="store_true", help="Perform a dry run of the deployment.")
     parser.add_argument("--verbose", action="store_true", help="Print verbose output.")
+    parser.add_argument("--no-verify", dest="no_verify", action="store_true",
+                        help="Skip release signature verification for every component "
+                             "(development only; loud override, printed for audit).")
     args = parser.parse_args()
 
     # Check that the user is logged in
@@ -142,6 +145,11 @@ def main():
 
     # Print header
     printc(LIGHT_BLUE + BOLD, "Deploying your OpenSecOps application...")
+
+    # Single, quiet notice for the whole run — the per-component deploy.py
+    # processes stay silent about verification when it is skipped.
+    if args.no_verify:
+        printc(RED + BOLD, "Release verification disabled (--no-verify).")
 
     # Get the parent directory from the CWD
     current_dir = os.getcwd()
@@ -186,7 +194,7 @@ def main():
 
     # Deploy the repos
     for repo in config['repos']:
-        if not deploy_repo(repo, parent_dir, args.dry_run, args.verbose):
+        if not deploy_repo(repo, parent_dir, args.dry_run, args.verbose, no_verify=args.no_verify):
             printc(RED, "Deployment failed. Stopping further deployments.")
             break
 

@@ -66,6 +66,7 @@ inline_policy:
               - backup:*
               - backup-storage:*
               - batch:*
+              - bedrock:*
               - cloudformation:*
               - cloudshell:*
               - cloudtrail:*
