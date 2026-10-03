@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.0.19
+    * Security: bump `urllib3` floor to `>=2.8.0` in the canonical `templates/boto3.in`, remediating CVE-2026-97687 (HTTPS-proxy TLS configuration ignored or overridden), CVE-2026-97688 (infinite loop on chunked Deflate responses) and CVE-2026-97689 (unbounded chunk-size-line buffering). All three are fixed in urllib3 2.8.0; the previous `>=2.7.0` floor resolved to 2.7.0, which is affected by all three. `urllib3` reaches the Installer transitively via `boto3` and `sigstore`. Distributed to every boto3-bearing component; each re-releases independently to carry the new floor.
+    * Lock recompiled with `--upgrade` so it stays bit-reproducible from `.in` + pinned `uv` version; other transitive deps moved to their latest in-range versions as a side effect. `boto3` holds at the mandated 1.42.94.
+    * Refresh the `urllib3` provenance baseline: a `Security policy` entry was added to `project_urls` upstream, consistent with the 2.8.0 security release. Advisory-only drift; recorded so the baseline matches PyPI again.
+
 ## v3.0.18
     * Security: bump `cryptography` 48.0.1 → 50.0.1, clearing `PYSEC-2026-3552` (PKCS#7 `EnvelopedData` Bleichenbacher oracle), `PYSEC-2026-3553` (exponential blowup building certificate chains containing duplicate self-signed certificates) and `PYSEC-2026-3554` (over-broad wildcard SAN accepted against a name-constrained intermediate CA). As in v3.0.17, the fix was gated by a transitive cap: `sigstore` 4.3.0 declares `cryptography <49`, below the fix versions, so `sigstore` moves 4.3.0 → 4.5.0 (within the existing `>=4.0.0,<5.0.0` pin), which drops the cap entirely. `pyopenssl` 26.2.0 → 26.4.0 followed transitively.
     * Security: bump `pyasn1` 0.6.3 → 0.6.4, clearing `PYSEC-2026-3455` (unbounded long-form tag IDs), `PYSEC-2026-3456` (quadratic OBJECT IDENTIFIER decoding) and `PYSEC-2026-3457` (`univ.Real` exponent blow-up). All three are decoder denial-of-service issues reachable from untrusted DER; `sigstore` decodes the OIDC-issuer extension of the Fulcio certificate carried in a release bundle, so this path is exercised during release verification.
