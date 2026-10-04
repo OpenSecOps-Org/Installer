@@ -171,8 +171,12 @@ WeeklyReportIndividualAccounts     = "Yes"                         # Configure t
 WeeklyReportTitle                  = "OpenSecOps SOAR Weekly Security Report"
 WeeklyReportWeekNumbers            = "ISO"                         # 'ISO' or 'No'
 
-BedrockRegion                      = "us-east-1"
-BedrockModel                       = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"  # NB: Inference profile used ("us.")
+AIModel                            = "anthropic.claude-opus-5-5"   # Claude models only
+AIFallbackModel                    = "anthropic.claude-opus-4-8"   # 'none' disables the fallback
+AIRegion                           = "us-east-1"                   # Configure this
+AILocality                         = "regional"                    # 'regional' or 'global'
+AIEffort                           = "high"                        # Opus 5.5: low, medium, high, xhigh, max
+AIMaxTokens                        = 128000                        # Output cap, thinking included; at most the model's limit
 
 
 # Dashboard -------------------------------------------------------------------

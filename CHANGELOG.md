@@ -1,5 +1,9 @@
 # Change Log
 
+## v3.0.20
+    * `apps.example/soar/parameters.toml`: the `BedrockRegion` and `BedrockModel` lines are replaced by the six AI parameters SOAR v4.0.0 requires, with the recommended values: `AIModel = "anthropic.claude-opus-5-5"`, `AIFallbackModel = "anthropic.claude-opus-4-8"`, `AIRegion = "us-east-1"`, `AILocality = "regional"`, `AIEffort = "high"`, `AIMaxTokens = 128000`.
+    * **Action required before deploying SOAR v4.0.0**: make the same edit in `apps/soar/parameters.toml`, delete the two `Bedrock…` lines and add the six AI lines, adjusting the values if wanted. See the SOAR v4.0.0 entry.
+
 ## v3.0.19
     * Security: bump `urllib3` floor to `>=2.8.0` in the canonical `templates/boto3.in`, remediating CVE-2026-97687 (HTTPS-proxy TLS configuration ignored or overridden), CVE-2026-97688 (infinite loop on chunked Deflate responses) and CVE-2026-97689 (unbounded chunk-size-line buffering). All three are fixed in urllib3 2.8.0; the previous `>=2.7.0` floor resolved to 2.7.0, which is affected by all three. `urllib3` reaches the Installer transitively via `boto3` and `sigstore`. Distributed to every boto3-bearing component; each re-releases independently to carry the new floor.
     * Lock recompiled with `--upgrade` so it stays bit-reproducible from `.in` + pinned `uv` version; other transitive deps moved to their latest in-range versions as a side effect. `boto3` holds at the mandated 1.42.94.
