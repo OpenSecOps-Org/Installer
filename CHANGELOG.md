@@ -1,5 +1,12 @@
 # Change Log
 
+## v3.0.21
+    * Security: bump `certifi` 2026.7.22 → 2026.10.23, clearing `PYSEC-2026-4320` (GHSA-6q48-6c7w-9gw2). Earlier `certifi` bundles trust the `emSign ECC Root CA - G3` root, under which eight eMudhra intermediate CAs with compromised private keys were issued; anyone holding one of those keys could issue a certificate for any hostname. 2026.10.19 and later drop the affected emSign roots. `certifi` reaches the Installer via `requests`.
+    * Security: bump `dnspython` 2.8.0 → 2.9.0, clearing `CVE-2026-114605` (GHSA-45c3-73f7-pv4m): `dns.name.from_wire_parser()` followed DNS compression-pointer chains without a hop limit, so a crafted DNS message could cause excessive CPU use. `dnspython` reaches the Installer via `email-validator`.
+    * `sigstore` 4.5.0 → 4.5.1 (within the existing `>=4.0.0,<5.0.0` pin). 4.5.1 no longer depends on `pyasn1` or `pyOpenSSL`, so both leave the lock. Release verification re-checked end to end against a published signed release under the new lock: valid artefacts verify, tampered artefacts are rejected.
+    * Refresh the `sigstore` provenance baseline: the `author` field, previously empty, is now populated upstream as `Sigstore Authors`, matching the unchanged `author_email`. Advisory-only drift; recorded so the baseline matches PyPI again.
+    * Lock recompiled with `--upgrade` so it stays bit-reproducible from `.in` + pinned `uv` version; other transitive deps moved to their latest in-range versions as a side effect (`platformdirs`, `pycparser`, `pydantic`, `pydantic-core`, `securesystemslib`, `tomlkit`). `boto3` holds at the mandated 1.42.94.
+
 ## v3.0.20
     * `apps.example/soar/parameters.toml`: the `BedrockRegion` and `BedrockModel` lines are replaced by the six AI parameters SOAR v4.0.0 requires, with the recommended values: `AIModel = "anthropic.claude-opus-5-5"`, `AIFallbackModel = "anthropic.claude-opus-4-8"`, `AIRegion = "us-east-1"`, `AILocality = "regional"`, `AIEffort = "high"`, `AIMaxTokens = 128000`.
     * **Action required before deploying SOAR v4.0.0**: make the same edit in `apps/soar/parameters.toml`, delete the two `Bedrock…` lines and add the six AI lines, adjusting the values if wanted. See the SOAR v4.0.0 entry.

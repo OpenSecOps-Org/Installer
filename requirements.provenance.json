@@ -13,7 +13,7 @@
       }
     },
     "sigstore": {
-      "author": "",
+      "author": "Sigstore Authors",
       "author_email": "Sigstore Authors <sigstore-dev@googlegroups.com>",
       "home_page": "",
       "maintainer": "",
