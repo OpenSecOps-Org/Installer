@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.0
+    * New canonical `templates/aws_errors.py`: the named error `AWSTransientError` and the `transient_aws_errors` decorator. A Lambda run by a state machine raises throttling, AWS-side failures (5xx) and connection problems as `AWSTransientError`, keeping the original error as its cause, so the state machine can retry them by name; all other errors keep their own name and are not retried.
+    * `refresh` distributes it to every component with a state machine definition, as `functions/layers/aws_errors/python/aws_errors.py`, which each component packages in its own Lambda layer. Same stale-removal rule as `boto3.in`: a copy left in a component without a state machine is reported, not deleted.
+    * `.gitignore`: Lambda layer sources under `functions/layers/*/python/lib/` are no longer ignored. The generic Python `lib/` rule matched them, so a new module in such a layer was silently left out of commits.
+
 ## v3.0.21
     * Security: bump `certifi` 2026.7.22 → 2026.10.23, clearing `PYSEC-2026-4320` (GHSA-6q48-6c7w-9gw2). Earlier `certifi` bundles trust the `emSign ECC Root CA - G3` root, under which eight eMudhra intermediate CAs with compromised private keys were issued; anyone holding one of those keys could issue a certificate for any hostname. 2026.10.19 and later drop the affected emSign roots. `certifi` reaches the Installer via `requests`.
     * Security: bump `dnspython` 2.8.0 → 2.9.0, clearing `CVE-2026-114605` (GHSA-45c3-73f7-pv4m): `dns.name.from_wire_parser()` followed DNS compression-pointer chains without a hop limit, so a crafted DNS message could cause excessive CPU use. `dnspython` reaches the Installer via `email-validator`.

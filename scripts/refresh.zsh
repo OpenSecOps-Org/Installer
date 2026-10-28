@@ -60,6 +60,8 @@ SCRIPTS=(
 # surface in each component repo is intentionally narrow.
 SECURITY_TEMPLATE_FILE="templates/SECURITY.md.template"
 BOTO3_IN_FILE="templates/boto3.in"
+AWS_ERRORS_FILE="templates/aws_errors.py"
+AWS_ERRORS_DEST="functions/layers/aws_errors/python/aws_errors.py"
 DEPLOY_EXAMPLE_FILE="templates/config-deploy.toml.example"
 CHANGELOG_EXAMPLE_FILE="templates/CHANGELOG.md.example"
 LICENSE_FILE="LICENSE.txt"
@@ -284,6 +286,22 @@ do
         elif [[ -f "$REPO/boto3.in" ]]
         then
             echo -e "${YELLOW}no boto3 usage detected; existing $REPO/boto3.in left in place — git rm if you're sure${END}"
+        fi
+
+        # Conditionally distribute aws_errors.py — the named errors that
+        # state machines retry (AWSTransientError and the decorator that
+        # raises it). Every repo with a state machine definition gets the
+        # canonical copy at a fixed path, which its own template packages
+        # as a Lambda layer. Same stale-removal rule as boto3.in.
+        STATE_MACHINE_FILES=("$REPO"/statemachine*/**/*.asl.(yaml|yml|json)(N))
+        if (( ${#STATE_MACHINE_FILES} ))
+        then
+            echo -e "${YELLOW}state machine detected — copying $AWS_ERRORS_FILE to $REPO/$AWS_ERRORS_DEST${END}"
+            mkdir -p "$REPO/${AWS_ERRORS_DEST:h}"
+            cp "$AWS_ERRORS_FILE" "$REPO/$AWS_ERRORS_DEST"
+        elif [[ -f "$REPO/$AWS_ERRORS_DEST" ]]
+        then
+            echo -e "${YELLOW}no state machine detected; existing $REPO/$AWS_ERRORS_DEST left in place — git rm if you're sure${END}"
         fi
 
         # If DEV_MODE is true, copy example deploy and changelog config file to the main REPO if it does not exist
