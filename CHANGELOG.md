@@ -1,5 +1,13 @@
 # Change Log
 
+## v3.1.1
+    * Fix: SOAR stopped receiving Security Hub findings after AWS changed how EventBridge authorizes deliveries to an event bus in another account. The Security-Adm account's rule that forwards findings to the `SOAR-events` bus in the organisation account became subject to Security-Adm's SCPs, including their conditions on the target bus's tags. `protect-infra-immutable.json` denied `events:Put*` on resources tagged `infra:immutable=true`. The wildcard also covers `events:PutEvents` and `events:PutPartnerEvents`, which only send events, and `SOAR-events` carries that tag. From then on every delivery was denied, with no change to the SCP, the bus or the rule. We saw the change take effect in eu-north-1 on 11 August 2026. AWS rolls out changes Region by Region, so the date can differ in other Regions.
+    * The statement now names the three actions that change a bus or its rules: `events:PutPermission`, `events:PutRule` and `events:PutTargets`. Sending events to a tagged bus is no longer denied; changing the bus or its rules still is.
+    * An installation is affected if, in the Security-Adm account in the main region, the `FailedInvocations` metric of the rule `INFRA-sec-hub-configuration-FindingsRule-…` equals its `Invocations`.
+    * Findings imported while deliveries failed never reached SOAR, and this fix does not resend them.
+    * **Action required**: Copy the following file from `apps.example/` to `apps/` and redeploy `Foundation-service-control-policies` (`./deploy` in that component, or `./deploy-all`):
+        - `foundation/SCPs/protect-infra-immutable.json`
+
 ## v3.1.0
     * New canonical `templates/aws_errors.py`: the named error `AWSTransientError` and the `transient_aws_errors` decorator. A Lambda run by a state machine raises throttling, AWS-side failures (5xx) and connection problems as `AWSTransientError`, keeping the original error as its cause, so the state machine can retry them by name; all other errors keep their own name and are not retried.
     * `refresh` distributes it to every component with a state machine definition, as `functions/layers/aws_errors/python/aws_errors.py`, which each component packages in its own Lambda layer. Same stale-removal rule as `boto3.in`: a copy left in a component without a state machine is reported, not deleted.
