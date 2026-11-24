@@ -12,11 +12,9 @@
 #
 # Publishing: `publish_results: true` signs the results (`id-token:
 # write`) and sends them to the Scorecard API, which feeds the badge.
-# `fail_on_publish_error: true` fails the analysis step when the API
-# rejects the results; network errors and HTTP 408, 429 and 5xx stay
-# warnings, so a Scorecard outage does not fail the run. The upload
-# steps run with `if: always()`, so the SARIF still reaches Code
-# Scanning when publishing fails.
+# A publish the API rejects shows as a warning annotation on the run.
+# The upload steps run with `if: always()`, so the SARIF still reaches
+# Code Scanning when an earlier step fails.
 #
 # The API accepts results only from a workflow that keeps its
 # restrictions: no top-level or job-level `env` or `defaults`, no
@@ -27,8 +25,10 @@
 # step-security/harden-runner. No `run` steps. Keep it that way when
 # editing (https://github.com/ossf/scorecard-action#workflow-restrictions).
 #
-# Action pins match upstream's examples/scorecard.yml for
-# ossf/scorecard-action v2.6.0, including `cache-mode: none`.
+# Action pins match upstream's examples/scorecard.yml as tagged at
+# v2.6.0 (which pins ossf/scorecard-action v2.5.0), including
+# `cache-mode: none`. v2.6.0 itself is not used: its container image
+# can't be pulled (https://github.com/ossf/scorecard-action/issues/1752).
 #
 # SARIF upload (final step) surfaces Scorecard findings in GitHub's
 # Security tab alongside Dependabot alerts.
@@ -92,12 +92,11 @@ jobs:
           persist-credentials: false
 
       - name: Run analysis
-        uses: ossf/scorecard-action@23f22cd43608bae7a1f1fa2603d7314dee9538a5  # v2.6.0
+        uses: ossf/scorecard-action@fa7117db83c52d787ae5a89f350999701505d78e  # v2.5.0
         with:
           results_file: results.sarif
           results_format: sarif
           publish_results: true
-          fail_on_publish_error: true
 
       - name: Upload artifact
         if: ${{ always() }}

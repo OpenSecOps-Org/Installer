@@ -1,5 +1,8 @@
 # Change Log
 
+## v3.1.4
+    * Fix: the OpenSSF Scorecard run failed before analysing anything, because the `ossf/scorecard-action` v2.6.0 container image can no longer be pulled from ghcr.io ([ossf/scorecard-action#1752](https://github.com/ossf/scorecard-action/issues/1752)). The workflow now pins v2.5.0. v2.5.0 has no `fail_on_publish_error` input, so the setting is removed; a publish the Scorecard API rejects shows as a warning on the run. `publish_results` stays `true`. Applies to the canonical `templates/.github/workflows/scorecard.yml.disabled` and the Installer's own workflow.
+
 ## v3.1.3
     * OpenSSF Scorecard: `ossf/scorecard-action` v2.4.3 → v2.6.0 with `publish_results: true`, so results are published to https://scorecard.dev/, and `fail_on_publish_error: true`, so a publish the Scorecard API rejects fails the run instead of passing silently. The other actions in the workflow move to the pins in upstream's v2.6.0 example (`actions/checkout` v7.0.1, `actions/upload-artifact` v7.0.2, `github/codeql-action/upload-sarif` v4.39.3), the SARIF uploads run even when an earlier step fails, and the workflow sets `cache-mode: none`. Applies to the canonical `templates/.github/workflows/scorecard.yml.disabled` and the Installer's own workflow. Components already have the workflow enabled, so `refresh` does not overwrite it; each component carries the change in its own release.
     * `README.md`: the Scorecard badge shows the scorecard.dev score instead of the workflow status.
