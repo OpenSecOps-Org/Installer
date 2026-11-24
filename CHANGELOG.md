@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.1.3
+    * OpenSSF Scorecard: `ossf/scorecard-action` v2.4.3 → v2.6.0 with `publish_results: true`, so results are published to https://scorecard.dev/, and `fail_on_publish_error: true`, so a publish the Scorecard API rejects fails the run instead of passing silently. The other actions in the workflow move to the pins in upstream's v2.6.0 example (`actions/checkout` v7.0.1, `actions/upload-artifact` v7.0.2, `github/codeql-action/upload-sarif` v4.39.3), the SARIF uploads run even when an earlier step fails, and the workflow sets `cache-mode: none`. Applies to the canonical `templates/.github/workflows/scorecard.yml.disabled` and the Installer's own workflow. Components already have the workflow enabled, so `refresh` does not overwrite it; each component carries the change in its own release.
+    * `README.md`: the Scorecard badge shows the scorecard.dev score instead of the workflow status.
+    * `SECURITY.md` and the canonical `SECURITY.md.template`: the Scorecard paragraph states that results are published to scorecard.dev; the description of the earlier suppression is removed.
+
 ## v3.1.2
     * Security: bump `dnspython` 2.9.0 → 2.9.2, clearing `CVE-2026-128089` (GHSA-vvf4-9x63-8xvv): the `from_text()` parser for WKS records did not check that the service number is between 0 and 65535 before using it as a bitmap offset, so a crafted zone file could cause excessive memory and CPU use. Only parsing of attacker-controlled zone-file text is affected. `dnspython` reaches the Installer via `email-validator`.
     * `sigstore` 4.5.1 → 4.6.0 (within the existing `>=4.0.0,<5.0.0` pin). 4.6.0 uses `urllib3` directly instead of `requests`, so `requests`, `certifi` and `charset-normalizer` leave the lock. `sigstore`'s HTTPS connections now use Python's default certificate store, as `tuf` and the release verifier's own GitHub requests already did. Without `certifi`, `botocore` uses its own bundled CA file, which does not contain the emSign roots. Release verification re-checked end to end against a published signed release under the new lock: valid artefacts verify, tampered artefacts are rejected.
